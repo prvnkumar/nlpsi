@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(__file__)
 trainingSetTweetsFilePath = os.path.join(BASE_DIR,"../data/training_set_tweets.txt")
 trainingSetUsersFilePath = os.path.join(BASE_DIR,"../data/training_set_users.txt")
 testSetTweetsFilePath = os.path.join(BASE_DIR,"../data/test_set_tweets.txt")
-testSetUsersFilePath = os.path.join(BASE_DIR,"../data/twitter/test_set_users.txt")
+testSetUsersFilePath = os.path.join(BASE_DIR,"../data/test_set_users.txt")
 
 
 userToTweetsMap = dict()
@@ -51,19 +51,23 @@ def populateTwitterUsers(userId,location):
 
 
 def populateUserToTweetsMap(userId,date,tweetId):
-    """a dictionary :
-    key : twitter user id
-    value:  date :twitter id
+    """
+    Dictionary :
+    key : user_id
+    value:  Dict(date : tweet_id)
     """
     if not userId in userToTweetsMap:
         userToTweetsMap[userId] = dict()
-        userToTweetsMap[userId][date] = tweetId
+        userToTweetsMap[userId][date] = [tweetId]
     else:
-        userToTweetsMap[userId][date] = tweetId
+        if userToTweetsMap[userId].get(date, None) is not None:
+            userToTweetsMap[userId][date].append(tweetId)
+        else:
+            userToTweetsMap[userId][date] = [tweetId]
 
 
-def readUsersFile(file):
-    f = open(file,'r')
+def readUsersFile(users_file):
+    f = open(users_file,'r')
     for line in f:
         userId = line.strip("\n").split("\t")[0]
         location = line.strip("\n").split("\t")[1]
@@ -104,7 +108,7 @@ def getUsersGoingInactiveAfterMonth(month, year):
         last_tweet_date = max(tweet_dates)
         if last_tweet_date >= start_date and last_tweet_date < end_date:
             result_users.append(user)
-            print tweets.keys(), getNumMonthsActive(tweet_dates)
+            print tweets.keys(), map(len, tweets.values()), getNumMonthsActive(tweet_dates)
             if DEBUG and len(result_users) > 10:
                 return result_users
     return result_users
@@ -124,6 +128,21 @@ def getNumMonthsActive(dates):
         if date > datetime.utcfromtimestamp(0):
             months.add(date.month)
     return len(months)
+
+def tweetFrequency(users):
+    freq_data = dict()
+    for user in users:
+        tweets = userToTweetsMap[user]
+        tweet_dates = map(str_to_date, tweets.keys())
+        first_date = min(tweet_dates)
+        last_date = max(tweet_dates)
+        num_days_tweeted = len(tweet_dates)
+        date_range_active = (last_date - first_date).days + 1
+        num_tweets = 0
+        for t in tweets.values():
+            num_tweets += len(t)
+        freq_data[user] = (date_range_active, num_days_tweeted, num_tweets)
+    return freq_data
 
 
 def read_raw_data():
@@ -161,5 +180,7 @@ if __name__ == '__main__':
         read_raw_data()
     read_parsed_data()
     print len(twitterUsers)
-    x1 = getUsersGoingInactiveAfterMonth(11, 2009)
-    x2 = getUsersGoingInactiveAfterMonth(10, 2009)
+    nov_quit = getUsersGoingInactiveAfterMonth(11, 2009)
+    for user in nov_quit:
+        print user
+    print tweetFrequency(nov_quit)
