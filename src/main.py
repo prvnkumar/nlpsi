@@ -1,4 +1,4 @@
-__author__ = 'evsharma'
+__author__ = 'Eva Sharma and Praveen Kumar'
 
 """
  Read the data from the files.
@@ -17,14 +17,17 @@ Another dictionary:
 
 """
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import json
 import os
 
+DEBUG = True
+
 BASE_DIR = os.path.dirname(__file__)
-trainingSetTweetsFilePath = os.path.join(BASE_DIR,"twitter/training_set_tweets.txt")
-trainingSetUsersFilePath = os.path.join(BASE_DIR,"twitter/training_set_users.txt")
-testSetTweetsFilePath = os.path.join(BASE_DIR,"twitter/test_set_tweets.txt")
-testSetUsersFilePath = os.path.join(BASE_DIR,"twitter/twitter/test_set_users.txt")
+trainingSetTweetsFilePath = os.path.join(BASE_DIR,"../data/training_set_tweets.txt")
+trainingSetUsersFilePath = os.path.join(BASE_DIR,"../data/training_set_users.txt")
+testSetTweetsFilePath = os.path.join(BASE_DIR,"../data/test_set_tweets.txt")
+testSetUsersFilePath = os.path.join(BASE_DIR,"../data/twitter/test_set_users.txt")
 
 
 userToTweetsMap = dict()
@@ -32,12 +35,16 @@ tweets = dict()
 twitterUsers = dict()
 
 def populateTweets(tweetId,tweet):
-    #populate the dictionary tweets with key as tweet id and value as the tweet
+    """
+    populate the dictionary tweets with key as tweet id and value as the tweet
+    """
     tweets[tweetId] = tweet
 
 def populateTwitterUsers(userId,location):
-    #populate the dictionary twitterUsers with key as twitter user id and value as array having index 0 as the
-    # state and index 1 as the city
+    """
+    populate the dictionary twitterUsers with key as twitter user id
+    and value as array having index 0 as the state and index 1 as the city
+    """
     twitterUsers[userId] = location.split(",")
     if(len(twitterUsers[userId]) > 1):
         twitterUsers[userId][1] = twitterUsers[userId][1].strip()
@@ -84,56 +91,45 @@ def writeToFile(file,obj):
     f = open(file,'w')
     json.dump(obj,f)
 
-def getUsersGoingInactiveAfterNov(user):
-    if user in userToTweetsMap.keys():
-        dates = list(userToTweetsMap[user].keys())
-        dates.sort()
-        #print(dates)
-        if isActiveFromDec2009(dates) == False:
-            if isActiveinNov2009(dates) == True:
-                numMonthsActive = getNumMonthsActive(dates)
-                print("User : ",user,"Months Active: ",numMonthsActive+1)
+def getUsersGoingInactiveAfterMonth(month, year):
+    """
+    Returns the list of users who were active in given month but not after that
+    """
+    print "here"
+    start_date = datetime(year, month, 1)
+    end_date = start_date + relativedelta(months=1)
+    result_users = []
+    for user, tweets in userToTweetsMap.iteritems():
+        tweet_dates = map(str_to_date, tweets.keys())
+        last_tweet_date = max(tweet_dates)
+        if last_tweet_date >= start_date and last_tweet_date < end_date:
+            result_users.append(user)
+            print tweets.keys(), getNumMonthsActive(tweet_dates)
+            if DEBUG and len(result_users) > 10:
+                return result_users
+    return result_users
 
-
-
-
-
-def isActiveFromDec2009(dates):
-    isActive = False
-    for date in dates:
-        try:
-            d = datetime.strptime(date, '%Y-%m-%d')
-            if(d.year == 2010 or (d.year == 2009 and d.month >11)):
-                isActive = True
-        except ValueError:
-            continue
-    return isActive
-
-def isActiveinNov2009(dates):
-    isActive = False
-    for date in dates:
-        try:
-            d = datetime.strptime(date, '%Y-%m-%d')
-            if(d.year == 2009 and d.month ==11):
-                isActive = True
-        except ValueError:
-            continue
-    return isActive
+def str_to_date(date_str):
+    if isinstance(date_str, datetime):
+        return date_str
+    try:
+        d = datetime.strptime(date_str, '%Y-%m-%d')
+        return d
+    except ValueError:
+        return datetime.utcfromtimestamp(0)
 
 def getNumMonthsActive(dates):
-    months = list()
+    months = set()
     for date in dates:
-        try:
-            d = datetime.strptime(date, '%Y-%m-%d')
-            if(d.month<11 and d.year < 2010):
-                months.append(d.month)
-        except ValueError:
-            continue
-    return len(list(set(months)))
+        if date > datetime.utcfromtimestamp(0):
+            months.add(date.month)
+    return len(months)
 
 
-if __name__ == '__main__':
-
+def read_raw_data():
+    """
+    Parse original dataset
+    """
     print("Reading ",trainingSetUsersFilePath)
     readUsersFile(trainingSetUsersFilePath)
     print("\nReading ",trainingSetTweetsFilePath)
@@ -142,14 +138,28 @@ if __name__ == '__main__':
     writeToFile(os.path.join(BASE_DIR,"Dict/twitterUsers.txt"),twitterUsers)
     writeToFile(os.path.join(BASE_DIR,"Dict/tweets.txt"),tweets)
     writeToFile(os.path.join(BASE_DIR,"Dict/userToTweetsMap.txt"),userToTweetsMap)
+
+def read_parsed_data():
+    """
+    Read parsed data from files
+    """
+    global twitterUsers
+    global tweets
+    global userToTweetsMap
     print("\nPopulating twitterUsers")
     twitterUsers = json.load(open(os.path.join(BASE_DIR,"Dict/twitterUsers.txt")))
-    print("\nPopulating tweets")
-    tweets = json.load(open(os.path.join(BASE_DIR,"Dict/tweets.txt")))
+    #print("\nPopulating tweets")
+    #tweets = json.load(open(os.path.join(BASE_DIR,"Dict/tweets.txt")))
     print("\nPopulating userToTweetsMap")
     userToTweetsMap = json.load(open(os.path.join(BASE_DIR,"Dict/userToTweetsMap.txt")))
+    print("Done populating data")
+    print len(twitterUsers)
 
-
-    for user in twitterUsers.keys():
-        getUsersGoingInactiveAfterNov(user)
-
+if __name__ == '__main__':
+    re_read = False
+    if re_read:
+        read_raw_data()
+    read_parsed_data()
+    print len(twitterUsers)
+    x1 = getUsersGoingInactiveAfterMonth(11, 2009)
+    x2 = getUsersGoingInactiveAfterMonth(10, 2009)
