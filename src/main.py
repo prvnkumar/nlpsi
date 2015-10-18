@@ -18,6 +18,7 @@ Another dictionary:
 """
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from enum import Enum
 import json
 import random
 import os
@@ -34,6 +35,13 @@ testSetUsersFilePath = os.path.join(BASE_DIR,"../data/test_set_users.txt")
 userToTweetsMap = dict()
 tweets = dict()
 twitterUsers = dict()
+
+class Ops(Enum):
+    Eq  = '=='
+    LtE  = '<='
+    Lt  = '<'
+    GtE  = '>='
+    Gt  = '>'
 
 def populateTweets(tweetId,tweet):
     """
@@ -96,64 +104,88 @@ def writeToFile(file,obj):
     f = open(file,'w')
     json.dump(obj,f)
 
-def sample_users(n):
+def sampleUsers(n):
     return random.sample(twitterUsers.keys(), n)
 
 
-def getUsersGoingInactiveAfterMonth(month, year):
+def filterUsersByEndMonth(users, month, year):
     """
     Returns the list of users who were active in given month but not after that
     """
-    print "here"
-    start_date = datetime(year, month, 1)
-    end_date = start_date + relativedelta(months=1)
-    result_users = []
-    for user, tweets in userToTweetsMap.iteritems():
-        tweet_dates = map(str_to_date, tweets.keys())
-        last_tweet_date = max(tweet_dates)
-        if last_tweet_date >= start_date and last_tweet_date < end_date:
-            result_users.append(user)
-            # print tweets.keys(), map(len, tweets.values()), getNumMonthsActive(tweet_dates)
-            if DEBUG and len(result_users) > 10000:
-                return result_users
-    return result_users
+    startDate = datetime(year, month, 1)
+    endDate = startDate + relativedelta(months=1)
+    resultUsers = []
+    for user in users:
+        tweets = userToTweetsMap.get(user, None)
+        if tweets == None:
+            continue
+        tweetDates = map(strToDate, tweets.keys())
+        lastTweetDate = max(tweetDates)
+        if lastTweetDate >= startDate and lastTweetDate < endDate:
+            resultUsers.append(user)
+            # print tweets.keys(), map(len, tweets.values()), getNumMonthsActive(tweetDates)
+    return resultUsers
 
-def str_to_date(date_str):
-    if isinstance(date_str, datetime):
-        return date_str
+def strToDate(dateStr):
+    if isinstance(dateStr, datetime):
+        return dateStr
     try:
-        d = datetime.strptime(date_str, '%Y-%m-%d')
+        d = datetime.strptime(dateStr, '%Y-%m-%d')
         return d
     except ValueError:
         return datetime.utcfromtimestamp(0)
 
-def getNumMonthsActive(dates):
+def getNumMonthsActive(user):
+    """
+    Get number of months a user is active
+    """
+    dates = map(strToDate, userToTweetsMap[user].keys())
     months = set()
     for date in dates:
         if date > datetime.utcfromtimestamp(0):
             months.add(date.month)
     return len(months)
 
+def filterBasedOnActiveMonths(users, op, numMonths):
+    """
+    Filter users based on how long where they active
+    """
+    if op == Ops.Eq:
+        return [user for user in users if getNumMonthsActive(user) == numMonths]
+    elif op == Ops.Lt:
+        return [user for user in users if getNumMonthsActive(user) < numMonths]
+    elif op == Ops.LtE:
+        return [user for user in users if getNumMonthsActive(user) <= numMonths]
+    elif op == Ops.Gt:
+        return [user for user in users if getNumMonthsActive(user) > numMonths]
+    elif op == Ops.GtE:
+        return [user for user in users if getNumMonthsActive(user) >= numMonths]
+    else:
+        raise Exception("Unknown op")
+
 def tweetFrequency(users):
-    freq_data = dict()
+    """
+    Some statistics about tweet frequency
+    """
+    freqData = dict()
     for user in users:
         tweets = userToTweetsMap.get(user, None)
         if tweets is None:
-            freq_data[user] = (0, 0, 0)
+            continue
         else:
-            tweet_dates = map(str_to_date, tweets.keys())
-            first_date = min(tweet_dates)
-            last_date = max(tweet_dates)
-            num_days_tweeted = len(tweet_dates)
-            date_range_active = (last_date - first_date).days + 1
-            num_tweets = 0
+            tweetDates = map(strToDate, tweets.keys())
+            firstDate = min(tweetDates)
+            lastDate = max(tweetDates)
+            numDaysTweeted = len(tweetDates)
+            dateRangeActive = (lastDate - firstDate).days + 1
+            numTweets = 0
             for t in tweets.values():
-                num_tweets += len(t)
-            freq_data[user] = (date_range_active, num_days_tweeted, num_tweets)
-    return freq_data
+                numTweets += len(t)
+            freqData[user] = (dateRangeActive, numDaysTweeted, numTweets)
+    return freqData
 
 
-def read_raw_data():
+def readRawData():
     """
     Parse original dataset
     """
@@ -166,7 +198,7 @@ def read_raw_data():
     writeToFile(os.path.join(BASE_DIR,"Dict/tweets.txt"),tweets)
     writeToFile(os.path.join(BASE_DIR,"Dict/userToTweetsMap.txt"),userToTweetsMap)
 
-def read_parsed_data():
+def readParsedData():
     """
     Read parsed data from files
     """
@@ -181,25 +213,45 @@ def read_parsed_data():
     userToTweetsMap = json.load(open(os.path.join(BASE_DIR,"Dict/userToTweetsMap.txt")))
     print("Done populating data")
 
+
 if __name__ == '__main__':
     re_read = False
     if re_read:
-        read_raw_data()
-    read_parsed_data()
+        readRawData()
+    readParsedData()
     print len(twitterUsers)
-    nov_quit_users = getUsersGoingInactiveAfterMonth(11, 2009)
-    random_users = sample_users(10000)
-    nov_quit_users_freq = tweetFrequency(nov_quit_users)
-    random_users_freq = tweetFrequency(random_users)
+    allUsers = twitterUsers.keys()
 
-    avg_tweet_per_day = 0
-    for (rng, td, nt) in nov_quit_users_freq.values():
-        avg_tweet_per_day += 1.0*nt/td
-    print avg_tweet_per_day/len(nov_quit_users)
+    start_end_users = dict()
+    for end in range(9,13):
+        endUsers = filterUsersByEndMonth(allUsers, end, 2009)
+        for start in range(9, end+1):
+            if start not in start_end_users.keys():
+                start_end_users[start] = dict()
+            print start, end
+            duration = end - start + 1
+            start_end_users[start][end] = filterBasedOnActiveMonths(
+                    endUsers,
+                    Ops.Eq,
+                    duration)
 
-    print len(nov_quit_users)
-    avg_tweet_per_day = 0
-    for (rng, td, nt) in tweetFrequency(random_users).values():
-        if (rng > 0):
-            avg_tweet_per_day += 1.0*nt/td
-    print avg_tweet_per_day/len(random_users)
+    for start, v in start_end_users.iteritems():
+        for end, users in v.iteritems():
+            print start, end
+            freqData = tweetFrequency(users)
+            avgTweetPerDay = 0
+            avgTweetPerDayOnTweetDays = 0
+            for (rng_active, num_tweet_days, num_tweets) in freqData.values():
+                avgTweetPerDay += 1.0*num_tweets/rng_active
+                avgTweetPerDayOnTweetDays += 1.0*num_tweets/num_tweet_days
+            print avgTweetPerDay/len(users), avgTweetPerDayOnTweetDays/len(users), len(users)
+
+    randomUsers = sampleUsers(10000)
+    randomUsersFreq = tweetFrequency(randomUsers)
+    avgTweetPerDay = 0
+    avgTweetPerDayOnTweetDays = 0
+    for (rng_active, num_tweet_days, num_tweets) in freqData.values():
+        if (num_tweet_days > 0):
+            avgTweetPerDay += 1.0*num_tweets/rng_active
+            avgTweetPerDayOnTweetDays += 1.0*num_tweets/num_tweet_days
+    print avgTweetPerDay/len(randomUsers), avgTweetPerDayOnTweetDays/len(randomUsers), len(randomUsers)
