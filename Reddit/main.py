@@ -39,108 +39,74 @@ class ConcatJSONDecoder(json.JSONDecoder):
             end = _w(s, end).end()
             yield obj
 
-def storeDataForUser(jsonObj):
-
+def storeDataForUser(comment):
     # get a reference to the table 'user'
-    # table = db[(jsonObj["author"])]
+    # table = db[(comment["author"])]
 
-    if jsonObj.get("selftext") !=  None :
-        commentText = jsonObj["selftext"]
-    elif jsonObj.get("body") != '':
-        commentText = jsonObj["body"]
+    if comment.get("selftext") !=  None :
+        commentText = comment["selftext"]
+    elif comment.get("body") != None:
+        commentText = comment["body"]
     else:
         commentText = None
-    jsonObj['selfText'] = commentText
-    jsonObj.pop('body', None)
+    comment['selfText'] = commentText
+    comment.pop('body', None)
 
-#    tableDict = dict()
-#    tableDict["subreddit"] = (jsonObj["subreddit"]) if (jsonObj["subreddit"]) != '' else 'None'
-#    tableDict["subreddit_id"] = (jsonObj["subreddit_id"]) if (jsonObj["subreddit_id"]) != '' else 'None'
-#    tableDict["author"] = (jsonObj["author"]) if (jsonObj["author"]) != '' else 'None'
-#    tableDict["comment_id"] = (jsonObj["id"]) if (jsonObj["author"]) != '' else 'None'
-#    tableDict["selftext"] = commentText
-#    tableDict["title"] = jsonObj.get("title",'None')
-#    tableDict["likes"] = (jsonObj["likes"]) if (jsonObj.get("likes",'')]) != '' else 'None'
-#    tableDict["downs"] = (jsonObj["downs"]) if (jsonObj["downs"]) != '' else 'None'
-#    tableDict["num_comments"] = (jsonObj["num_comments"]) if (jsonObj["num_comments"]) != '' else 'None'
-#    tableDict["ups"] = (jsonObj["ups"]) if (jsonObj["ups"]) != '' else 'None'
-#    tableDict["created_utc"] = (jsonObj["created_utc"]) if (jsonObj["created_utc"]) != '' else 'None'
-
-    with open(os.path.join(processedDataPath,str(jsonObj["author"])), 'a+') as outfile:
-        json.dump(jsonObj, outfile)
+    with open(os.path.join(processedDataPath,str(comment["author"])), 'a+') as outfile:
+        json.dump(comment, outfile)
     # Insert a new record.
     # table.insert(tableDict)
 
-#path = sys.argv[1]
-#path2 = sys.argv[2]
 path = rawDataPath
 print(path)
 
-def recursionForStoringData(jsonObj):
-    if len(jsonObj['children']) > 0:
-        for child in jsonObj['children']:
+def recursionForStoringData(comment):
+    if len(comment['children']) > 0:
+        for child in comment['children']:
             recursionForStoringData(child)
     else:
-        if (jsonObj["author"] in totalUsers):
-            if (jsonObj.get("selftext") != "None" and jsonObj.get("selftext")!= '') or (jsonObj.get("body") != "None" and jsonObj.get("body")!= ''):
-                storeDataForUser(jsonObj)
+        if (comment["author"] in totalUsers):
+            if (comment.get("selftext") != "None" and comment.get("selftext")!= '') or (comment.get("body") != "None" and comment.get("body")!= ''):
+                storeDataForUser(comment)
 
 
-def populateUserList(jsonObj):
-    if len(jsonObj['children']) > 0:
-        for child in jsonObj['children']:
-            populateUserList(child)
-    if (jsonObj["author"] != "[deleted]" and jsonObj["author"] != None and jsonObj["author"] != '') and ((jsonObj.get("selftext") != "None" and jsonObj.get("selftext")!= '') or (jsonObj.get("body") != "None" and jsonObj.get("body")!= '')) :
-        originalUserList.append(jsonObj["author"])
+def populateUserList(comment, numCommentsPerAuthor):
+    if len(comment['children']) > 0:
+        for child in comment['children']:
+            populateUserList(child, numCommentsPerAuthor)
+    if (comment["author"] != "[deleted]" and comment["author"] != None and comment["author"] != '') and ((comment.get("selftext") != "None" and comment.get("selftext")!= '') or (comment.get("body") != "None" and comment.get("body")!= '')) :
+        author = comment['author']
+        n = numCommentsPerAuthor.get(author, 0)
+        numCommentsPerAuthor[author] = n+1
 
-originalUserList = list()
 totalUsers = set()
 
 def main():
-
-
-    # walk the directory and read the files
-    # Make sure you have all the raw data files in folder
-    # RawData...
-
-
-    # find out the list of users to get the data for
     for file in os.listdir(path):
+        print file
         if file.endswith(".txt") or file.endswith(".jsonlist"):
             # load the json List from every file
-
             jsonList = json.load(open(os.path.join(path,file)),cls=ConcatJSONDecoder)
-            # From the JsonList populate the DB for every user
+            print "File loaded."
+            numCommentsPerAuthor = dict()
+            for comment in jsonList:
+                populateUserList(comment, numCommentsPerAuthor)
 
-            print "-------------------"
-            print file
+            numCommentsByRegUsers = 0
+            totalNumComments = 0
+            regularUsers = []
+            for author in numCommentsPerAuthor.keys():
+                numComments = numCommentsPerAuthor[author]
+                totalNumComments += numComments
+                if numComments > 20:
+                    regularUsers.append(author)
+                    numCommentsByRegUsers += numComments
 
-            for jsonObj in jsonList:
-                populateUserList(jsonObj)
-
-            userDict = dict()
-            for i in originalUserList:
-                userDict[i] = userDict.get(i, 0) + 1
-
-            newDict = dict()
-            numOfUsers = len(userDict.keys())
-            #print "total unique users before =" + str(numOfUsers)
-            for key in userDict:
-                if userDict[key] > 20:
-                    newDict[key] = userDict[key]
-
-            posts = 0
-            for value in newDict.values():
-                posts+=value
-
-            if len(newDict.keys())>0:
-                for user in newDict.keys():
-                    totalUsers.add(user)
-
-            print "total number of users who had posts>20 is" + str(len(newDict.keys()))
-            print "total number of posts " + str(posts)
+            print "Total number of users:", len(numCommentsPerAuthor)
+            print "Total number of comments by all users:", totalNumComments
+            print "Number of users who had comments > 20:", len(regularUsers)
+            print "Total number of comments by such users:", numCommentsByRegUsers
             print "------------------"
-    print "Total number of users collected is : "+str(len(totalUsers))
 
     print "Now populating data"
     count = 0
@@ -149,16 +115,11 @@ def main():
             # load the json List from every file
             jsonList = json.load(open(os.path.join(path,file)),cls=ConcatJSONDecoder)
             # From the JsonList populate the DB for every user
-            for jsonObj in jsonList:
-                recursionForStoringData(jsonObj)
-
-
-
-
+            for comment in jsonList:
+                recursionForStoringData(comment)
     print count
 
 def checkIfInactiveAfterSOFForSixMonths(user,sofTime):
-
     sofPlusSixMonths = sofTime + relativedelta(months=+6)
     timeArray = list()
     for data in user:
