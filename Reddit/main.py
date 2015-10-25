@@ -29,8 +29,8 @@ projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
 rawDataPath = os.path.join(projectRootDir,"RawData") #Folder to keep raw jsonlist files
 processedDataPath = os.path.join(projectRootDir,"ProcessedData")
 
-shutil.rmtree(processedDataPath, ignore_errors=True)
-os.mkdir(processedDataPath)
+# shutil.rmtree(processedDataPath, ignore_errors=True)
+# os.mkdir(processedDataPath)
 
 
 ###
@@ -122,15 +122,15 @@ def main():
             print "Total number of comments by such users:", numCommentsByRegUsers
             print "------------------"
 
-    print "Storing comments for regular users"
-    for fileName in os.listdir(rawDataPath):
-        if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
-            jsonList = json.load(
-                    open(os.path.join(rawDataPath, fileName)),
-                    cls=ConcatJSONDecoder)
-            for comment in jsonList:
-                storeComment(comment)
-    print "soring done"
+    # print "Storing comments for regular users"
+    # for fileName in os.listdir(rawDataPath):
+    #     if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
+    #         jsonList = json.load(
+    #                 open(os.path.join(rawDataPath, fileName)),
+    #                 cls=ConcatJSONDecoder)
+    #         for comment in jsonList:
+    #             storeComment(comment)
+    # print "soring done"
 
 def isActiveAfterSOFFor(commentDates, sofTime, nMonths):
     sofPlusSixMonths = sofTime + relativedelta(months=+12)
@@ -275,17 +275,18 @@ def findUsersWhoQuit():
 
 
 uniqueWordsForUser = dict()
+word_punct_tokenizer = WordPunctTokenizer()
+stop = stopwords.words('english')
 def createUNiGramModelFromUserComments(user,comments):
 
     commentTokens = list()
-    stop = stopwords.words('english') + string.punctuation
+
     for comment in comments:
-        tempList = [i for i in word_tokenize(comment.lower()) if i not in stop]
+        text = nltk.Text(word_punct_tokenizer.tokenize(comment.lower()))
+        tempList = [i for i in text if i not in stop]
         commentTokens.extend(tempList)
 
-    commentTokens = list(set(commentTokens))
-
-    uniqueWordsForUser[user] = len(commentTokens)
+    uniqueWordsForUser[user] = len(list(set(commentTokens)))
 
 
 
