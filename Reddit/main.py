@@ -115,40 +115,19 @@ def main():
             for comment in jsonList:
                 storeComment(comment)
 
-def checkIfInactiveAfterSOFForSixMonths(user,sofTime):
+def isActiveAfterSOFFor(commentDates, sofTime, nMonths):
     sofPlusSixMonths = sofTime + relativedelta(months=+6)
-    timeArray = list()
-    for data in user:
-        timeArray.append(datetime.utcfromtimestamp(data["created_utc"]).date())
-    timeArray = list(set(timeArray))
 
     isActive = False
     count = 0
-    for time in timeArray:
+    for timestamp in commentDates:
+        time = datetime.utcfromtimestamp(timestamp)
         if time > sofTime and time < sofPlusSixMonths:
-            count+=1
-
-    if count >=2 :
-        isActive = True
-    else:
-        isActive = False
-
+            count += 1
+            if count >= 2:
+                isActive = True
+                break
     return isActive
-
-lastCommentDates = set()
-
-def findLastActiveDay(user):
-    """
-    Find date of last comment by user
-    """
-    timeArray = []
-    for data in user:
-        timeArray.append(datetime.utcfromtimestamp(data["created_utc"]).date())
-    lastCommentDates.add(max(timeArray))
-
-usersWhoQuit = set()
-activeUsers = set()
-quitters = set()
 
 def median(s):
     i = len(s)
@@ -161,26 +140,31 @@ def findUsersWhoQuit():
     """
     Get users who quit
     """
-    for fileName in os.listdir(processedDataPath):
-        jsonList = json.load(
-                open(os.path.join(processedDataPath, fileName)),
+    activeUsers = set()
+    quitters = set()
+    commentDates = dict()
+    lastCommentDates = []
+    for user in regularUsers:
+        comments = json.load(
+                open(os.path.join(processedDataPath, user)),
                 cls=ConcatJSONDecoder)
-        findLastActiveDay(jsonList)
+        commentDates[user] = [float(comment['created_utc'])
+                for comment in comments]
+        lastCommentDates.append(max(commentDates[user]))
 
-    sofTime = median(list(lastCommentDates))
+    sofTime = datetime.utcfromtimestamp(median(lastCommentDates))
     print sofTime
 
-    for fileName in os.listdir(processedDataPath):
-        jsonList = json.load(open(os.path.join(processedDataPath,fileName)),cls=ConcatJSONDecoder)
-        if checkIfInactiveAfterSOFForSixMonths(jsonList,sofTime) == True:
-            activeUsers.add(fileName)
+    for user in regularUsers:
+        if isActiveAfterSOFFor(commentDates[user], sofTime, 6):
+            activeUsers.add(user)
         else:
-            quitters.add(fileName)
+            quitters.add(user)
 
-    print str(len(quitters))
-    print str(len(activeUsers))
+    print len(quitters)
+    print len(activeUsers)
 
 
 if __name__ == "__main__":
     main()
-    #findUsersWhoQuit()
+    findUsersWhoQuit()
