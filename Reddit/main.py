@@ -7,11 +7,18 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import dataset
 from multiprocessing import Pool
+from math import floor
 import numpy
 import shutil
 import sys
+import nltk
 from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
-
+import nltk
+nltk.download()
+from nltk.tokenize import WordPunctTokenizer
+from nltk.corpus import stopwords
+import string
+from nltk import word_tokenize
 __author__ = 'Eva Sharma and Praveen Kumar'
 
 # Global variables
@@ -57,6 +64,8 @@ def storeDataForUser(comment):
 
     with open(os.path.join(processedDataPath,str(comment["author"])), 'a+') as outfile:
         json.dump(comment, outfile)
+
+
 
 def storeComment(comment):
     if len(comment['children']) > 0:
@@ -121,9 +130,10 @@ def main():
                     cls=ConcatJSONDecoder)
             for comment in jsonList:
                 storeComment(comment)
+    print "soring done"
 
 def isActiveAfterSOFFor(commentDates, sofTime, nMonths):
-    sofPlusSixMonths = sofTime + relativedelta(months=+6)
+    sofPlusSixMonths = sofTime + relativedelta(months=+12)
 
     isActive = False
     count = 0
@@ -177,23 +187,33 @@ def findUsersWhoQuit():
     numAvgResponses = dict()
     responseSentiment = dict()
     commentSentiment = dict()
+    commentWithNoReponses = dict()
+    commentsForUsers = dict()
     print 'Find users who quit'
     for user in regularUsers:
         comments = json.load(
                 open(os.path.join(processedDataPath, user)),
                 cls=ConcatJSONDecoder)
+
         nres = 0
         ncom = 0
         commentDatesList = []
         responseSentiment[user] = []
         commentSentiment[user] = []
+        commentWithNoReponses[user] = 0
+        commentsForUsers[user] = list()
         for comment in comments:
+            commentsForUsers[user].append(comment["selftext"])
             commentDatesList.append(float(comment['created_utc']))
-            nres += lenSubComments(comment)
+            numSubComments = lenSubComments(comment)
+            if numSubComments == 0:
+                commentWithNoReponses[user]+=1
+            nres += numSubComments
             ncom += 1
             responseSentiment[user].append(getSentimentResponse(comment))
             commentSentiment[user].append(vaderSentiment(comment.get('selftext').encode('utf-8'))['compound'])
         numAvgResponses[user] = nres/ncom
+        commentWithNoReponses[user] = floor(commentWithNoReponses[user])/floor(ncom)
         commentDates[user] = commentDatesList
         lastCommentDates.append(max(commentDatesList))
 
@@ -209,6 +229,10 @@ def findUsersWhoQuit():
     print len(quitters)
     print len(activeUsers)
     print "Quitters"
+
+    print "For Quitter Num No response : " , numpy.average([commentWithNoReponses[user] for user in quitters])
+    print "For Active Num No response : " , numpy.average([commentWithNoReponses[user] for user in activeUsers])
+
     avg_sentiment = 0
     avg_sentiment_correlation = 0
     for user in quitters:
@@ -238,6 +262,32 @@ def findUsersWhoQuit():
     for user in activeUsers:
         nc += numAvgResponses[user]
     print 'Active users avg # response:', float(nc)/len(activeUsers)
+
+    print "NLTK work"
+    for user in commentsForUsers.keys():
+        createUNiGramModelFromUserComments(user,commentsForUsers[user])
+
+    print "For Quitter Num of unique words used : " , numpy.average([uniqueWordsForUser[user] for user in quitters])
+    print "For Active Num of unique words used : " , numpy.average([uniqueWordsForUser[user] for user in activeUsers])
+
+
+
+
+
+uniqueWordsForUser = dict()
+def createUNiGramModelFromUserComments(user,comments):
+
+    commentTokens = list()
+    stop = stopwords.words('english') + string.punctuation
+    for comment in comments:
+        tempList = [i for i in word_tokenize(comment.lower()) if i not in stop]
+        commentTokens.extend(tempList)
+
+    commentTokens = list(set(commentTokens))
+
+    uniqueWordsForUser[user] = len(commentTokens)
+
+
 
 
 def measure_correlation(comment_sent, response_sent_list):
