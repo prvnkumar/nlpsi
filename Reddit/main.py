@@ -6,10 +6,13 @@ import calendar
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import dataset
+from multiprocessing import Pool
 import numpy
+import shutil
 import sys
+from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
 
-__author__ = 'evsharma and Praveen Kumar'
+__author__ = 'Eva Sharma and Praveen Kumar'
 
 # Global variables
 regularUsers = []
@@ -18,6 +21,10 @@ regularUsers = []
 projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
 rawDataPath = os.path.join(projectRootDir,"RawData") #Folder to keep raw jsonlist files
 processedDataPath = os.path.join(projectRootDir,"ProcessedData")
+
+shutil.rmtree(processedDataPath, ignore_errors=True)
+os.mkdir(processedDataPath)
+
 
 ###
 ### Read/Load json
@@ -45,7 +52,7 @@ def storeDataForUser(comment):
         commentText = comment["body"]
     else:
         commentText = None
-    comment['selfText'] = commentText
+    comment['selftext'] = commentText
     comment.pop('body', None)
 
     with open(os.path.join(processedDataPath,str(comment["author"])), 'a+') as outfile:
@@ -142,15 +149,35 @@ def lenSubComments(comment):
         n += lenSubComments(c)
     return n
 
+def worker(response):
+    selftext = response.get('selftext', None)
+    if selftext is not None:
+        return vaderSentiment(selftext.encode('utf-8'))['compound']
+    return 0
+
+
+def getSentimentResponse(comment):
+    """
+    For each comment in comments, return the sentiment of direct responses
+    """
+    sentimentPerComment = []
+    for response in comment['children']:
+        sentimentPerComment.append(worker(response))
+    return sentimentPerComment
+
+
 def findUsersWhoQuit():
     """
     Get users who quit
     """
-    activeUsers = set()
-    quitters = set()
+    activeUsers = []
+    quitters = []
     commentDates = dict()
     lastCommentDates = []
     numAvgResponses = dict()
+    responseSentiment = dict()
+    commentSentiment = dict()
+    print 'Find users who quit'
     for user in regularUsers:
         comments = json.load(
                 open(os.path.join(processedDataPath, user)),
@@ -158,10 +185,14 @@ def findUsersWhoQuit():
         nres = 0
         ncom = 0
         commentDatesList = []
+        responseSentiment[user] = []
+        commentSentiment[user] = []
         for comment in comments:
             commentDatesList.append(float(comment['created_utc']))
             nres += lenSubComments(comment)
             ncom += 1
+            responseSentiment[user].append(getSentimentResponse(comment))
+            commentSentiment[user].append(vaderSentiment(comment.get('selftext').encode('utf-8'))['compound'])
         numAvgResponses[user] = nres/ncom
         commentDates[user] = commentDatesList
         lastCommentDates.append(max(commentDatesList))
@@ -171,20 +202,60 @@ def findUsersWhoQuit():
 
     for user in regularUsers:
         if isActiveAfterSOFFor(commentDates[user], sofTime, 6):
-            activeUsers.add(user)
+            activeUsers.append(user)
         else:
-            quitters.add(user)
+            quitters.append(user)
 
     print len(quitters)
     print len(activeUsers)
+    print "Quitters"
+    avg_sentiment = 0
+    avg_sentiment_correlation = 0
+    for user in quitters:
+        avg_sentiment += average(responseSentiment[user])
+        avg_sentiment_correlation += measure_correlation(
+                commentSentiment[user],
+                responseSentiment[user])
+    print avg_sentiment/len(quitters)
+    print avg_sentiment_correlation/len(quitters)
+
+    avg_sentiment = 0
+    avg_sentiment_correlation = 0
+    print "Active"
+    for user in activeUsers:
+        avg_sentiment += average(responseSentiment[user])
+        avg_sentiment_correlation += measure_correlation(
+                commentSentiment[user],
+                responseSentiment[user])
+    print avg_sentiment/len(activeUsers)
+    print avg_sentiment_correlation/len(activeUsers)
+
     nc = 0
     for user in quitters:
         nc += numAvgResponses[user]
-    print float(nc)/len(quitters)
+    print 'Quitters num avg # response:', float(nc)/len(quitters)
     nc = 0
     for user in activeUsers:
         nc += numAvgResponses[user]
-    print float(nc)/len(activeUsers)
+    print 'Active users avg # response:', float(nc)/len(activeUsers)
+
+
+def measure_correlation(comment_sent, response_sent_list):
+    avg_response_sent = []
+    for lst in response_sent_list:
+        avg_response_sent.append(numpy.average(lst))
+    return numpy.corrcoef(comment_sent, avg_response_sent)[0, 1]
+
+def average(ll):
+    n = 0
+    sum = 0
+    for l in ll:
+        n += len(l)
+        for x in l:
+            sum += x
+    if n==0:
+        return 0
+    return sum/n
 
 
 if __name__ == "__main__":
