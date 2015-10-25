@@ -1,4 +1,4 @@
-__author__ = 'evsharma'
+__author__ = 'evsharma and Praveen Kumar'
 
 import os
 import json
@@ -11,17 +11,13 @@ import sys
 import numpy
 from dateutil.relativedelta import relativedelta
 
+# Global variables
+regularUsers = []
 
 #Directory Paths
 projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
 rawDataPath = os.path.join(projectRootDir,"RawData") #Folder to keep raw jsonlist files
 processedDataPath = os.path.join(projectRootDir,"ProcessedData")
-#create DB
-# connecting to a SQLite database
-# db = dataset.connect('sqlite:///mydatabase.db')
-
-#list of users
-users = set()
 
 ###
 ### Read/Load json
@@ -40,9 +36,9 @@ class ConcatJSONDecoder(json.JSONDecoder):
             yield obj
 
 def storeDataForUser(comment):
-    # get a reference to the table 'user'
-    # table = db[(comment["author"])]
-
+    """
+    Store per user data in file
+    """
     if comment.get("selftext") !=  None :
         commentText = comment["selftext"]
     elif comment.get("body") != None:
@@ -54,47 +50,49 @@ def storeDataForUser(comment):
 
     with open(os.path.join(processedDataPath,str(comment["author"])), 'a+') as outfile:
         json.dump(comment, outfile)
-    # Insert a new record.
-    # table.insert(tableDict)
 
-path = rawDataPath
-print(path)
-
-def recursionForStoringData(comment):
+def storeComment(comment):
     if len(comment['children']) > 0:
         for child in comment['children']:
-            recursionForStoringData(child)
-    else:
-        if (comment["author"] in totalUsers):
-            if (comment.get("selftext") != "None" and comment.get("selftext")!= '') or (comment.get("body") != "None" and comment.get("body")!= ''):
-                storeDataForUser(comment)
+            storeComment(child)
+    if (comment["author"] in regularUsers):
+        if (comment.get("selftext") != "None" and \
+                comment.get("selftext")!= '') or \
+                (comment.get("body") != "None" and comment.get("body")!= ''):
+            storeDataForUser(comment)
 
-
-def populateUserList(comment, numCommentsPerAuthor):
+def calcCommentsPerAuthor(comment, numCommentsPerAuthor):
+    """
+    Calculate number of comments per author
+    """
     if len(comment['children']) > 0:
         for child in comment['children']:
-            populateUserList(child, numCommentsPerAuthor)
-    if (comment["author"] != "[deleted]" and comment["author"] != None and comment["author"] != '') and ((comment.get("selftext") != "None" and comment.get("selftext")!= '') or (comment.get("body") != "None" and comment.get("body")!= '')) :
+            calcCommentsPerAuthor(child, numCommentsPerAuthor)
+    if (comment["author"] != "[deleted]" and \
+            comment["author"] != None and \
+            comment["author"] != '') and \
+            ((comment.get("selftext") != "None" and comment.get("selftext")!= '') \
+              or (comment.get("body") != "None" and comment.get("body")!= '')) :
         author = comment['author']
         n = numCommentsPerAuthor.get(author, 0)
         numCommentsPerAuthor[author] = n+1
 
-totalUsers = set()
-
 def main():
-    for file in os.listdir(path):
-        print file
-        if file.endswith(".txt") or file.endswith(".jsonlist"):
-            # load the json List from every file
-            jsonList = json.load(open(os.path.join(path,file)),cls=ConcatJSONDecoder)
-            print "File loaded."
+    global regularUsers
+    for fileName in os.listdir(rawDataPath):
+        print fileName
+        if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
+            # load the json List from every fileName
+            jsonList = json.load(
+                    open(os.path.join(rawDataPath, fileName)),
+                    cls=ConcatJSONDecoder)
+            print "file loaded."
             numCommentsPerAuthor = dict()
             for comment in jsonList:
-                populateUserList(comment, numCommentsPerAuthor)
+                calcCommentsPerAuthor(comment, numCommentsPerAuthor)
 
             numCommentsByRegUsers = 0
             totalNumComments = 0
-            regularUsers = []
             for author in numCommentsPerAuthor.keys():
                 numComments = numCommentsPerAuthor[author]
                 totalNumComments += numComments
@@ -108,16 +106,14 @@ def main():
             print "Total number of comments by such users:", numCommentsByRegUsers
             print "------------------"
 
-    print "Now populating data"
-    count = 0
-    for file in os.listdir(path):
-        if file.endswith(".txt") or file.endswith(".jsonlist"):
-            # load the json List from every file
-            jsonList = json.load(open(os.path.join(path,file)),cls=ConcatJSONDecoder)
-            # From the JsonList populate the DB for every user
+    print "Storing comments for regular users"
+    for fileName in os.listdir(rawDataPath):
+        if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
+            jsonList = json.load(
+                    open(os.path.join(rawDataPath, fileName)),
+                    cls=ConcatJSONDecoder)
             for comment in jsonList:
-                recursionForStoringData(comment)
-    print count
+                storeComment(comment)
 
 def checkIfInactiveAfterSOFForSixMonths(user,sofTime):
     sofPlusSixMonths = sofTime + relativedelta(months=+6)
@@ -139,16 +135,16 @@ def checkIfInactiveAfterSOFForSixMonths(user,sofTime):
 
     return isActive
 
-sof = set()
+lastCommentDates = set()
 
-def findSOF(user):
-
-    timeArray = list()
+def findLastActiveDay(user):
+    """
+    Find date of last comment by user
+    """
+    timeArray = []
     for data in user:
         timeArray.append(datetime.utcfromtimestamp(data["created_utc"]).date())
-    timeArray = list(set(timeArray))
-    timeArray.sort(reverse=True)
-    sof.add(timeArray[0])
+    lastCommentDates.add(max(timeArray))
 
 usersWhoQuit = set()
 activeUsers = set()
@@ -156,30 +152,30 @@ quitters = set()
 
 def median(s):
     i = len(s)
+    l = sorted(s)
     if not i%2:
-        return (s[(i/2)-1]+s[i/2])/2.0
-    return s[i/2]
+        return (l[(i/2)-1]+l[i/2])/2.0
+    return l[i/2]
 
 def findUsersWhoQuit():
+    """
+    Get users who quit
+    """
+    for fileName in os.listdir(processedDataPath):
+        jsonList = json.load(
+                open(os.path.join(processedDataPath, fileName)),
+                cls=ConcatJSONDecoder)
+        findLastActiveDay(jsonList)
 
-
-    for file in os.listdir(processedDataPath):
-        jsonList = json.load(open(os.path.join(processedDataPath,file)),cls=ConcatJSONDecoder)
-        findSOF(jsonList)
-
-    sofTime = median(list(sof))
+    sofTime = median(list(lastCommentDates))
     print sofTime
 
-    for file in os.listdir(processedDataPath):
-        jsonList = json.load(open(os.path.join(processedDataPath,file)),cls=ConcatJSONDecoder)
+    for fileName in os.listdir(processedDataPath):
+        jsonList = json.load(open(os.path.join(processedDataPath,fileName)),cls=ConcatJSONDecoder)
         if checkIfInactiveAfterSOFForSixMonths(jsonList,sofTime) == True:
-            activeUsers.add(file)
+            activeUsers.add(fileName)
         else:
-            quitters.add(file)
-
-
-
-
+            quitters.add(fileName)
 
     print str(len(quitters))
     print str(len(activeUsers))
