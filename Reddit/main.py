@@ -33,13 +33,11 @@ class ConcatJSONDecoder(json.JSONDecoder):
     def decode(self, s, _w=WHITESPACE.match):
         s_len = len(s)
 
-        objs = []
         end = 0
         while end != s_len:
             obj, end = self.raw_decode(s, idx=_w(s, end).end())
             end = _w(s, end).end()
-            objs.append(obj)
-        return objs
+            yield obj
 
 def storeDataForUser(jsonObj):
 
@@ -79,7 +77,6 @@ path = rawDataPath
 print(path)
 
 def recursionForStoringData(jsonObj):
-
     if len(jsonObj['children']) > 0:
         for child in jsonObj['children']:
             recursionForStoringData(child)
@@ -90,17 +87,15 @@ def recursionForStoringData(jsonObj):
 
 
 def populateUserList(jsonObj):
-
-
     if len(jsonObj['children']) > 0:
         for child in jsonObj['children']:
             populateUserList(child)
-    else:
-        if (jsonObj["author"] != "[deleted]" and jsonObj["author"] != None and jsonObj["author"] != '') and ((jsonObj.get("selftext") != "None" and jsonObj.get("selftext")!= '') or (jsonObj.get("body") != "None" and jsonObj.get("body")!= '')) :
-            originalUserList.append(jsonObj["author"])
+    if (jsonObj["author"] != "[deleted]" and jsonObj["author"] != None and jsonObj["author"] != '') and ((jsonObj.get("selftext") != "None" and jsonObj.get("selftext")!= '') or (jsonObj.get("body") != "None" and jsonObj.get("body")!= '')) :
+        originalUserList.append(jsonObj["author"])
 
 originalUserList = list()
 totalUsers = set()
+
 def main():
 
 
@@ -122,8 +117,6 @@ def main():
 
             for jsonObj in jsonList:
                 populateUserList(jsonObj)
-
-
 
             userDict = dict()
             for i in originalUserList:
