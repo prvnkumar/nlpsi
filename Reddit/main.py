@@ -243,8 +243,8 @@ def findUsersWhoQuit():
 def measure_correlation(comment_sent, response_sent_list):
     avg_response_sent = []
     for lst in response_sent_list:
-        avg_response_sent.append(numpy.average(lst))
-    return numpy.corrcoef(comment_sent, avg_response_sent)[0, 1]
+        avg_response_sent.append(numpy.average(lst) if len(lst) > 0 else 0)
+    return numpy.cov(comment_sent, avg_response_sent)[0, 1]
 
 def average(ll):
     n = 0
