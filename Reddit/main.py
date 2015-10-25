@@ -44,30 +44,30 @@ def storeDataForUser(jsonObj):
     # get a reference to the table 'user'
     # table = db[(jsonObj["author"])]
 
-    print jsonObj.get("selftext")
     if jsonObj.get("selftext") !=  None :
         commentText = jsonObj["selftext"]
     elif jsonObj.get("body") != '':
         commentText = jsonObj["body"]
-        print jsonObj
     else:
-        commentText = 'None'
+        commentText = None
+    jsonObj['selfText'] = commentText
+    jsonObj.pop('body', None)
 
-    tableDict = dict()
-    tableDict["subreddit"] = (jsonObj["subreddit"]) if (jsonObj["subreddit"]) != '' else 'None'
-    tableDict["subreddit_id"] = (jsonObj["subreddit_id"]) if (jsonObj["subreddit_id"]) != '' else 'None'
-    tableDict["author"] = (jsonObj["author"]) if (jsonObj["author"]) != '' else 'None'
-    tableDict["comment_id"] = (jsonObj["id"]) if (jsonObj["author"]) != '' else 'None'
-    tableDict["selftext"] = commentText
-    tableDict["title"] = (jsonObj["title"]) if (jsonObj["title"]) != '' else 'None'
-    tableDict["likes"] = (jsonObj["likes"]) if (jsonObj["likes"]) != '' else 'None'
-    tableDict["downs"] = (jsonObj["downs"]) if (jsonObj["downs"]) != '' else 'None'
-    tableDict["num_comments"] = (jsonObj["num_comments"]) if (jsonObj["num_comments"]) != '' else 'None'
-    tableDict["ups"] = (jsonObj["ups"]) if (jsonObj["ups"]) != '' else 'None'
-    tableDict["created_utc"] = (jsonObj["created_utc"]) if (jsonObj["created_utc"]) != '' else 'None'
+#    tableDict = dict()
+#    tableDict["subreddit"] = (jsonObj["subreddit"]) if (jsonObj["subreddit"]) != '' else 'None'
+#    tableDict["subreddit_id"] = (jsonObj["subreddit_id"]) if (jsonObj["subreddit_id"]) != '' else 'None'
+#    tableDict["author"] = (jsonObj["author"]) if (jsonObj["author"]) != '' else 'None'
+#    tableDict["comment_id"] = (jsonObj["id"]) if (jsonObj["author"]) != '' else 'None'
+#    tableDict["selftext"] = commentText
+#    tableDict["title"] = jsonObj.get("title",'None')
+#    tableDict["likes"] = (jsonObj["likes"]) if (jsonObj.get("likes",'')]) != '' else 'None'
+#    tableDict["downs"] = (jsonObj["downs"]) if (jsonObj["downs"]) != '' else 'None'
+#    tableDict["num_comments"] = (jsonObj["num_comments"]) if (jsonObj["num_comments"]) != '' else 'None'
+#    tableDict["ups"] = (jsonObj["ups"]) if (jsonObj["ups"]) != '' else 'None'
+#    tableDict["created_utc"] = (jsonObj["created_utc"]) if (jsonObj["created_utc"]) != '' else 'None'
 
-    with open(os.path.join(processedDataPath,str(tableDict["author"])), 'a+') as outfile:
-        json.dump(tableDict,outfile)
+    with open(os.path.join(processedDataPath,str(jsonObj["author"])), 'a+') as outfile:
+        json.dump(jsonObj, outfile)
     # Insert a new record.
     # table.insert(tableDict)
 
