@@ -1,15 +1,15 @@
-__author__ = 'evsharma and Praveen Kumar'
-
 import os
 import json
 import re
 from collections import defaultdict
 import calendar
 from datetime import datetime, timedelta
-import dataset
-import sys
-import numpy
 from dateutil.relativedelta import relativedelta
+import dataset
+import numpy
+import sys
+
+__author__ = 'evsharma and Praveen Kumar'
 
 # Global variables
 regularUsers = []
@@ -136,6 +136,12 @@ def median(s):
         return (l[(i/2)-1]+l[i/2])/2.0
     return l[i/2]
 
+def lenSubComments(comment):
+    n = len(comment['children'])
+    for c in comment['children']:
+        n += lenSubComments(c)
+    return n
+
 def findUsersWhoQuit():
     """
     Get users who quit
@@ -144,13 +150,21 @@ def findUsersWhoQuit():
     quitters = set()
     commentDates = dict()
     lastCommentDates = []
+    numAvgResponses = dict()
     for user in regularUsers:
         comments = json.load(
                 open(os.path.join(processedDataPath, user)),
                 cls=ConcatJSONDecoder)
-        commentDates[user] = [float(comment['created_utc'])
-                for comment in comments]
-        lastCommentDates.append(max(commentDates[user]))
+        nres = 0
+        ncom = 0
+        commentDatesList = []
+        for comment in comments:
+            commentDatesList.append(float(comment['created_utc']))
+            nres += lenSubComments(comment)
+            ncom += 1
+        numAvgResponses[user] = nres/ncom
+        commentDates[user] = commentDatesList
+        lastCommentDates.append(max(commentDatesList))
 
     sofTime = datetime.utcfromtimestamp(median(lastCommentDates))
     print sofTime
@@ -163,6 +177,14 @@ def findUsersWhoQuit():
 
     print len(quitters)
     print len(activeUsers)
+    nc = 0
+    for user in quitters:
+        nc += numAvgResponses[user]
+    print float(nc)/len(quitters)
+    nc = 0
+    for user in activeUsers:
+        nc += numAvgResponses[user]
+    print float(nc)/len(activeUsers)
 
 
 if __name__ == "__main__":
