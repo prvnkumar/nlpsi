@@ -1,0 +1,42 @@
+AmericanPolitics.jsonlist
+file loaded.
+Total number of users: 2483
+Total number of comments by all users: 19372
+Number of users who had comments > 50: 48
+Total number of comments by such users: 10448
+------------------
+AmericanHistory.jsonlist
+file loaded.
+Total number of users: 524
+Total number of comments by all users: 1163
+Number of users who had comments > 50: 49
+Total number of comments by such users: 91
+------------------
+AmericanGovernment.jsonlist
+file loaded.
+Total number of users: 804
+Total number of comments by all users: 4379
+Number of users who had comments > 50: 63
+Total number of comments by such users: 2083
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2013-04-08 15:01:29
+33
+30
+Quitters
+For Quitter Num No response :  0.696975719943
+For Active Num No response :  0.62945412283
+Quitter's comment sentiment pos neg neu: 0.0169794637018 0.0153390451275 0.128440680183
+Quitters: Avg sentiment of responses: -0.00592299382269
+Quitters: comment result correlation: -0.000454460029814
+Active
+Active user's comment sentiment pos neg neu: 0.0365479369541 0.0318630659572 0.272620319245
+Active users: Avg sentiment of responses: 0.0169672266048
+Active users: comment result correlation: 0.00770121066547
+Quitters num avg # response: 0.454545454545
+Active users avg # response: 0.733333333333
+NLTK work
+For Quitter Num of unique words used :  479.0
+For Active Num of unique words used :  1217.7
