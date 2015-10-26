@@ -1,0 +1,28 @@
+AskHistorians.jsonlist
+file loaded.
+Total number of users: 65908
+Total number of comments by all users: 559217
+Number of users who had comments > 50: 1466
+Total number of comments by such users: 286963
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2014-01-16 22:28:37.500000
+900
+566
+Quitters
+For Quitter Num No response :  0.463515833152
+For Active Num No response :  0.457901297393
+Quitter's comment sentiment pos neg neu: 0.105537494447 0.0723972367837 0.815518125278
+Quitters: Avg sentiment of responses: 0.0502438224718
+Quitters: comment result correlation: 0.01706907147
+Active
+Active user's comment sentiment pos neg neu: 0.105783599846 0.0641780773222 0.820693440283
+Active users: Avg sentiment of responses: 0.0601011541424
+Active users: comment result correlation: 0.0173180406264
+Quitters num avg # response: 2.34555555556
+Active users avg # response: 2.22791519435
+NLTK work
+For Quitter Num of unique words used :  2270.78333333
+For Active Num of unique words used :  4190.89045936
