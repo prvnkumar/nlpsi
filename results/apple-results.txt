@@ -1,0 +1,35 @@
+apple.jsonlist
+file loaded.
+Total number of users: 104126
+Total number of comments by all users: 1214761
+Number of users who had comments > 50: 4136
+Total number of comments by such users: 726756
+------------------
+applehelp.jsonlist
+file loaded.
+Total number of users: 26982
+Total number of comments by all users: 217483
+Number of users who had comments > 50: 4673
+Total number of comments by such users: 99213
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2014-01-06 23:20:53
+2845
+1828
+Quitters
+For Quitter Num No response :  0.50739698689
+For Active Num No response :  0.499942980868
+Quitter's comment sentiment pos neg neu: 0.11041146171 0.0611361518357 0.789281389584
+Quitters: Avg sentiment of responses: 0.0794419172862
+Quitters: comment result correlation: 0.00622261660497
+Active
+Active user's comment sentiment pos neg neu: 0.106559520004 0.058678987382 0.810850540834
+Active users: Avg sentiment of responses: 0.0827183141951
+Active users: comment result correlation: 0.00656738798526
+Quitters num avg # response: 2.17188049209
+Active users avg # response: 2.09190371991
+NLTK work
+For Quitter Num of unique words used :  1250.88646749
+For Active Num of unique words used :  1921.33971554
