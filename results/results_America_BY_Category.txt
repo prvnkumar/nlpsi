@@ -1,0 +1,133 @@
+Ask_Politics.jsonlist
+file loaded.
+Total number of users: 6149
+Total number of comments by all users: 50305
+Number of users who had comments > 20: 434
+Total number of comments by such users: 31538
+------------------
+Find users who quit
+2014-01-09 18:39:01
+258
+176
+Quitters
+For Quitter Num No response :  0.403873558578
+For Active Num No response :  0.43845455889
+0.0505896336656
+0.0255585345179
+Active
+0.0579387341537
+0.0297365873202
+Quitters num avg # response: 3.1511627907
+Active users avg # response: 2.39204545455
+NLTK work
+For Quitter Num of unique words used :  1112.14728682
+For Active Num of unique words used :  1758.23295455
+
+
+AmericanHistory.jsonlist
+file loaded.
+Total number of users: 524
+Total number of comments by all users: 1163
+Number of users who had comments > 20: 2
+Total number of comments by such users: 115
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2011-05-24 16:31:57
+1
+1
+Quitters
+For Quitter Num No response :  0.791208791209
+For Active Num No response :  0.666666666667
+0.0186923076923
+3.94513186813e-06
+Active
+-0.120825
+0.00132207065217
+Quitters num avg # response: 0.0
+Active users avg # response: 0.0
+NLTK work
+For Quitter Num of unique words used :  55.0
+For Active Num of unique words used :  109.0
+
+AmericanGovernment.txt
+file loaded.
+Total number of users: 804
+Total number of comments by all users: 4379
+Number of users who had comments > 20: 28
+Total number of comments by such users: 2537
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2012-02-26 05:03:33
+19
+9
+Quitters
+For Quitter Num No response :  0.710889594939
+For Active Num No response :  0.719727634467
+0.0216070542588
+-0.00495096786743
+Active
+0.00888129024196
+-0.000845013292844
+Quitters num avg # response: 0.157894736842
+Active users avg # response: 0.222222222222
+NLTK work
+For Quitter Num of unique words used :  354.421052632
+For Active Num of unique words used :  378.666666667
+
+
+antiwar.jsonlist
+file loaded.
+Total number of users: 1186
+Total number of comments by all users: 5585
+Number of users who had comments > 20: 36
+Total number of comments by such users: 2981
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2013-09-08 20:29:02
+24
+12
+Quitters
+For Quitter Num No response :  0.640272763487
+For Active Num No response :  0.735108458356
+-0.0583525178964
+-0.00709012836822
+Active
+-0.010969494595
+-0.000304937040766
+Quitters num avg # response: 0.583333333333
+Active users avg # response: 0.333333333333
+NLTK work
+For Quitter Num of unique words used :  453.291666667
+For Active Num of unique words used :  593.416666667
+AmericanPolitics.jsonlist
+file loaded.
+Total number of users: 2483
+Total number of comments by all users: 19372
+Number of users who had comments > 20: 126
+Total number of comments by such users: 12865
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2013-05-06 14:28:17
+68
+58
+Quitters
+For Quitter Num No response :  0.698671404401
+For Active Num No response :  0.554343767186
+0.0116419396244
+0.00373842429612
+Active
+0.0276344961111
+0.0127531014885
+Quitters num avg # response: 0.455882352941
+Active users avg # response: 1.41379310345
+NLTK work
+For Quitter Num of unique words used :  286.676470588
+For Active Num of unique words used :  766.465517241
