@@ -11,10 +11,8 @@ from math import floor
 import numpy
 import shutil
 import sys
-import nltk
 from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
 import nltk
-nltk.download()
 from nltk.tokenize import WordPunctTokenizer
 from nltk.corpus import stopwords
 import string
@@ -23,14 +21,16 @@ __author__ = 'Eva Sharma and Praveen Kumar'
 
 # Global variables
 regularUsers = []
+REPROCESS=False
 
 #Directory Paths
 projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
 rawDataPath = os.path.join(projectRootDir,"RawData") #Folder to keep raw jsonlist files
 processedDataPath = os.path.join(projectRootDir,"ProcessedData")
 
-# shutil.rmtree(processedDataPath, ignore_errors=True)
-# os.mkdir(processedDataPath)
+if REPROCESS:
+    shutil.rmtree(processedDataPath, ignore_errors=True)
+    os.mkdir(processedDataPath)
 
 
 ###
@@ -112,27 +112,28 @@ def main():
             for author in numCommentsPerAuthor.keys():
                 numComments = numCommentsPerAuthor[author]
                 totalNumComments += numComments
-                if numComments > 20:
+                if numComments > 50:
                     regularUsers.append(author)
                     numCommentsByRegUsers += numComments
 
             print "Total number of users:", len(numCommentsPerAuthor)
             print "Total number of comments by all users:", totalNumComments
-            print "Number of users who had comments > 20:", len(regularUsers)
+            print "Number of users who had comments > 50:", len(regularUsers)
             print "Total number of comments by such users:", numCommentsByRegUsers
             print "------------------"
 
-    # print "Storing comments for regular users"
-    # for fileName in os.listdir(rawDataPath):
-    #     if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
-    #         jsonList = json.load(
-    #                 open(os.path.join(rawDataPath, fileName)),
-    #                 cls=ConcatJSONDecoder)
-    #         for comment in jsonList:
-    #             storeComment(comment)
-    # print "soring done"
+    if REPROCESS:
+        print "Storing comments for regular users"
+        for fileName in os.listdir(rawDataPath):
+            if fileName.endswith(".txt") or fileName.endswith(".jsonlist"):
+                jsonList = json.load(
+                       open(os.path.join(rawDataPath, fileName)),
+                       cls=ConcatJSONDecoder)
+                for comment in jsonList:
+                    storeComment(comment)
+        print "soring done"
 
-def isActiveAfterSOFFor(commentDates, sofTime, nMonths):
+def isActiveAfterSOFFor(commentDates, sofTime):
     sofPlusSixMonths = sofTime + relativedelta(months=+12)
 
     isActive = False
@@ -211,7 +212,7 @@ def findUsersWhoQuit():
             nres += numSubComments
             ncom += 1
             responseSentiment[user].append(getSentimentResponse(comment))
-            commentSentiment[user].append(vaderSentiment(comment.get('selftext').encode('utf-8'))['compound'])
+            commentSentiment[user].append(vaderSentiment(comment.get('selftext').encode('utf-8')))
         numAvgResponses[user] = nres/ncom
         commentWithNoReponses[user] = floor(commentWithNoReponses[user])/floor(ncom)
         commentDates[user] = commentDatesList
@@ -221,7 +222,7 @@ def findUsersWhoQuit():
     print sofTime
 
     for user in regularUsers:
-        if isActiveAfterSOFFor(commentDates[user], sofTime, 6):
+        if isActiveAfterSOFFor(commentDates[user], sofTime):
             activeUsers.append(user)
         else:
             quitters.append(user)
@@ -233,6 +234,22 @@ def findUsersWhoQuit():
     print "For Quitter Num No response : " , numpy.average([commentWithNoReponses[user] for user in quitters])
     print "For Active Num No response : " , numpy.average([commentWithNoReponses[user] for user in activeUsers])
 
+
+    nc = 0
+    pos_quit  = 0
+    neg_quit  = 0
+    ntr_quit  = 0
+    for user in quitters:
+        for csent in commentSentiment[user]:
+            pos_quit += csent['positive']
+            neg_quit += csent['negative']
+            ntr_quit += csent['neutral']
+            nc += 1
+    pos_quit = float(pos_quit)/nc
+    neg_quit = float(neg_quit)/nc
+    ntr_quit = float(ntr_quit)/nc
+
+    print 'Quitter\'s comment sentiment pos neg ntr:', pos_quit, neg_quit, ntr_quit
     avg_sentiment = 0
     avg_sentiment_correlation = 0
     for user in quitters:
@@ -240,19 +257,36 @@ def findUsersWhoQuit():
         avg_sentiment_correlation += measure_correlation(
                 commentSentiment[user],
                 responseSentiment[user])
-    print avg_sentiment/len(quitters)
-    print avg_sentiment_correlation/len(quitters)
+    print 'Quitters: Avg sentiment of responses:', avg_sentiment/len(quitters)
+    print 'Quitters: comment result correlation:', avg_sentiment_correlation/len(quitters)
 
     avg_sentiment = 0
     avg_sentiment_correlation = 0
     print "Active"
+
+    nc = 0
+    pos_act  = 0
+    neg_act  = 0
+    ntr_act  = 0
+    for user in activeUsers:
+        for csent in commentSentiment[user]:
+            pos_act += csent['positive']
+            neg_act += csent['negative']
+            ntr_act += csent['neutral']
+            nc += 1
+    pos_act = float(pos_act)/nc
+    neg_act = float(neg_act)/nc
+    ntr_act = float(ntr_act)/nc
+
+    print 'Active user\'s comment sentiment pos neg ntr:', pos_act, neg_act, ntr_act
+ 
     for user in activeUsers:
         avg_sentiment += average(responseSentiment[user])
         avg_sentiment_correlation += measure_correlation(
                 commentSentiment[user],
                 responseSentiment[user])
-    print avg_sentiment/len(activeUsers)
-    print avg_sentiment_correlation/len(activeUsers)
+    print 'Active users: Avg sentiment of responses:', avg_sentiment/len(activeUsers)
+    print 'Active users: comment result correlation:', avg_sentiment_correlation/len(activeUsers)
 
     nc = 0
     for user in quitters:
@@ -293,9 +327,10 @@ def createUNiGramModelFromUserComments(user,comments):
 
 def measure_correlation(comment_sent, response_sent_list):
     avg_response_sent = []
+    compound_comment_sent = [x['compound'] for x in comment_sent]
     for lst in response_sent_list:
         avg_response_sent.append(numpy.average(lst) if len(lst) > 0 else 0)
-    return numpy.cov(comment_sent, avg_response_sent)[0, 1]
+    return numpy.cov(compound_comment_sent, avg_response_sent)[0, 1]
 
 def average(ll):
     n = 0
