@@ -1,0 +1,28 @@
+Aquariums.jsonlist
+file loaded.
+Total number of users: 16933
+Total number of comments by all users: 358217
+Number of users who had comments > 50: 1391
+Total number of comments by such users: 243217
+------------------
+Storing comments for regular users
+soring done
+Find users who quit
+2014-01-13 19:54:47
+790
+601
+Quitters
+For Quitter Num No response :  0.460328144123
+For Active Num No response :  0.457357284058
+Quitter's comment sentiment pos neg neu: 0.153730239674 0.0531449587715 0.752107713623
+Quitters: Avg sentiment of responses: 0.187229384889
+Quitters: comment result correlation: 0.00912778937649
+Active
+Active user's comment sentiment pos neg neu: 0.154217476523 0.0538922991873 0.75710640131
+Active users: Avg sentiment of responses: 0.169006607102
+Active users: comment result correlation: 0.0088426875724
+Quitters num avg # response: 1.8253164557
+Active users avg # response: 1.6921797005
+NLTK work
+For Quitter Num of unique words used :  1123.00379747
+For Active Num of unique words used :  1410.55574043
