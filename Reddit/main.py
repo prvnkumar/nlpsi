@@ -21,7 +21,7 @@ __author__ = 'Eva Sharma and Praveen Kumar'
 
 # Global variables
 regularUsers = []
-REPROCESS=False
+REPROCESS=True
 
 #Directory Paths
 projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
@@ -238,18 +238,18 @@ def findUsersWhoQuit():
     nc = 0
     pos_quit  = 0
     neg_quit  = 0
-    ntr_quit  = 0
+    neu_quit  = 0
     for user in quitters:
         for csent in commentSentiment[user]:
-            pos_quit += csent['positive']
-            neg_quit += csent['negative']
-            ntr_quit += csent['neutral']
+            pos_quit += csent['pos']
+            neg_quit += csent['neg']
+            neu_quit += csent['neu']
             nc += 1
     pos_quit = float(pos_quit)/nc
     neg_quit = float(neg_quit)/nc
-    ntr_quit = float(ntr_quit)/nc
+    neu_quit = float(neu_quit)/nc
 
-    print 'Quitter\'s comment sentiment pos neg ntr:', pos_quit, neg_quit, ntr_quit
+    print 'Quitter\'s comment sentiment pos neg neu:', pos_quit, neg_quit, neu_quit
     avg_sentiment = 0
     avg_sentiment_correlation = 0
     for user in quitters:
@@ -267,18 +267,18 @@ def findUsersWhoQuit():
     nc = 0
     pos_act  = 0
     neg_act  = 0
-    ntr_act  = 0
+    neu_act  = 0
     for user in activeUsers:
         for csent in commentSentiment[user]:
-            pos_act += csent['positive']
-            neg_act += csent['negative']
-            ntr_act += csent['neutral']
+            pos_act += csent['pos']
+            neg_act += csent['neg']
+            neu_act += csent['neu']
             nc += 1
     pos_act = float(pos_act)/nc
     neg_act = float(neg_act)/nc
-    ntr_act = float(ntr_act)/nc
+    neu_act = float(neu_act)/nc
 
-    print 'Active user\'s comment sentiment pos neg ntr:', pos_act, neg_act, ntr_act
+    print 'Active user\'s comment sentiment pos neg neu:', pos_act, neg_act, neu_act
  
     for user in activeUsers:
         avg_sentiment += average(responseSentiment[user])
