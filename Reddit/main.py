@@ -64,6 +64,7 @@ def storeDataForUser(comment):
 
     with open(os.path.join(processedDataPath,str(comment["author"])), 'a+') as outfile:
         json.dump(comment, outfile)
+        outfile.write("\n")
 
 
 
