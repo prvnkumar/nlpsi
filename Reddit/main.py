@@ -21,7 +21,7 @@ __author__ = 'Eva Sharma and Praveen Kumar'
 
 # Global variables
 regularUsers = []
-REPROCESS=True
+REPROCESS=False
 
 #Directory Paths
 projectRootDir = (os.path.dirname(__file__)) # This is your Project Root
@@ -304,12 +304,15 @@ def findUsersWhoQuit():
 
     print "For Quitter Num of unique words used : " , numpy.average([uniqueWordsForUser[user] for user in quitters])
     print "For Active Num of unique words used : " , numpy.average([uniqueWordsForUser[user] for user in activeUsers])
+    print "For Quitter Fraction of unique words used : " , numpy.average([uniqueWordsFractionForUser[user] for user in quitters])
+    print "For Active Fraction of unique words used : " , numpy.average([uniqueWordsFractionForUser[user] for user in activeUsers])
 
 
 
 
 
 uniqueWordsForUser = dict()
+uniqueWordsFractionForUser = dict()
 word_punct_tokenizer = WordPunctTokenizer()
 stop = stopwords.words('english')
 def createUNiGramModelFromUserComments(user,comments):
@@ -321,7 +324,8 @@ def createUNiGramModelFromUserComments(user,comments):
         tempList = [i for i in text if i not in stop]
         commentTokens.extend(tempList)
 
-    uniqueWordsForUser[user] = len(list(set(commentTokens)))
+    uniqueWordsForUser[user] = len(set(commentTokens))
+    uniqueWordsFractionForUser[user] = float(len(set(commentTokens)))/(len(commentTokens)+1)
 
 
 
