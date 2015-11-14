@@ -6,6 +6,7 @@ import calendar
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from math import floor
+from multiprocessing import Pool
 import nltk
 from nltk.tokenize import WordPunctTokenizer
 from nltk.corpus import stopwords
@@ -30,6 +31,7 @@ SENT_ANALYSIS = False
 
 word_punct_tokenizer = WordPunctTokenizer()
 stop = stopwords.words('english')
+lang_model = None
 
 ###
 ### Read/Load json
@@ -47,10 +49,11 @@ class ConcatJSONDecoder(json.JSONDecoder):
             end = _w(s, end).end()
             yield obj
 
-def storeDataForUser(comment, lm):
+def storeDataForUser(comment):
     """
     Store per user data in file
     """
+    global lang_model
     if comment.get("selftext") !=  None :
         commentText = comment["selftext"]
     elif comment.get("body") != None:
@@ -59,21 +62,21 @@ def storeDataForUser(comment, lm):
         commentText = None
     comment['selftext'] = commentText
     comment.pop('body', None)
-    lm.update(commentText)
+    lang_model.update(commentText)
 
     with open(os.path.join(PROC_DATA_PATH,str(comment["author"])), 'a+') as outfile:
         json.dump(comment, outfile)
         outfile.write("\n")
 
-def storeComment(regularUsers, comment, lm):
+def storeComment(regularUsers, comment):
     if len(comment['children']) > 0:
         for child in comment['children']:
-            storeComment(regularUsers, child, lm)
+            storeComment(regularUsers, child)
     if (comment["author"] in regularUsers):
         if (comment.get("selftext") != "None" and \
                 comment.get("selftext")!= '') or \
                 (comment.get("body") != "None" and comment.get("body")!= ''):
-            storeDataForUser(comment, lm)
+            storeDataForUser(comment)
 
 def calcCommentsPerAuthor(comment, numCommentsPerAuthor):
     """
@@ -93,15 +96,16 @@ def calcCommentsPerAuthor(comment, numCommentsPerAuthor):
 
 def findAndStoreRegularUsers():
     regularUsers = []
-    lm = LM()
+    global lang_model
+    lang_model = LM()
     if os.path.isfile(REGUSERLIST) and os.path.isfile(LM_PATH):
         print 'Reading REGUSERLIST'
         with open(REGUSERLIST, 'r') as f:
             regularUsers = [name.rstrip('\n') for name in f.readlines()]
         print 'Reading LM_PATH'
         with open(LM_PATH, 'r') as f:
-            lm = pickle.load(f)
-        return regularUsers, lm
+            lang_model = pickle.load(f)
+        return regularUsers
 
     shutil.rmtree(PROC_DATA_PATH, ignore_errors=True)
     os.mkdir(PROC_DATA_PATH)
@@ -128,7 +132,7 @@ def findAndStoreRegularUsers():
 
             print "Total number of users:", len(numCommentsPerAuthor)
             print "Total number of comments by all users:", totalNumComments
-            print "Number of users who had comments > 50:", len(regularUsers)
+            print "Number of users who had comments > 30:", len(regularUsers)
             print "Total number of comments by such users:", numCommentsByRegUsers
             print "------------------"
 
@@ -139,13 +143,13 @@ def findAndStoreRegularUsers():
                    open(os.path.join(RAW_DATA_PATH, fileName)),
                    cls=ConcatJSONDecoder)
             for comment in jsonList:
-                storeComment(regularUsers, comment, lm)
+                storeComment(regularUsers, comment)
     print "storing done"
     with open(REGUSERLIST, 'w') as f:
         f.write('\n'.join(regularUsers))
     with open(LM_PATH, 'w') as f:
-        pickle.dump(lm, f)
-    return regularUsers, lm
+        pickle.dump(lang_model, f)
+    return regularUsers
 
 def isActiveAfterSOFFor(commentDates, sofTime, n):
     sofPlusxMonths = sofTime + relativedelta(months=n)
@@ -191,67 +195,80 @@ def getSentimentResponse(comment):
     return sentimentPerComment
 
 
-def findUsersWhoQuit(regularUsers, lm):
+def findUsersWhoQuit(regularUsers):
     """
     Get users who quit
     """
     activeUsers = []
     quitters = []
     commentDates = dict()
-    lastCommentDates = []
+    lastCommentDates = dict()
+    firstCommentDates = dict()
     numAvgResponses = dict()
     responseSentiment = dict()
     commentSentiment = dict()
-    commentWithNoReponses = dict()
-    commentTextsForUser = dict()
-    commentsForUser = dict()
-    print 'Find users who quit'
+    numComNoResp = dict()
+    comTxtBeforeSOF = dict()
+    allcommentsForUser = dict()
+    print 'Reading comments for users'
     for user in regularUsers:
         print '.',
         comments = json.load(
                 open(os.path.join(PROC_DATA_PATH, user)),
                 cls=ConcatJSONDecoder)
 
-        nres = 0
-        ncom = 0
         commentDatesList = []
+        allcommentsForUser[user] = []
+        for comment in comments:
+            allcommentsForUser[user].append(comment)
+            commentDatesList.append(float(comment['created_utc']))
+        commentDates[user] = commentDatesList
+        lastCommentDates[user] = max(commentDatesList)
+        firstCommentDates[user] = min(commentDatesList)
+
+    sofTimets = median(lastCommentDates.values())
+    sofTime = datetime.utcfromtimestamp(sofTimets)
+    print "\nConsidering only the comments before SOF", sofTime
+    print "Ignoring users with first comment after SOF"
+    for user in regularUsers:
+        if firstCommentDates[user] > sofTimets:
+            continue
+        if isActiveAfterSOFFor(commentDates[user], sofTime, 3):
+            activeUsers.append(user)
+        else:
+            quitters.append(user)
+        comTxtBeforeSOF[user] = [comment["selftext"] for comment in allcommentsForUser[user] if float(comment['created_utc']) <= sofTimets]
+
+    quitters = quitters[:len(activeUsers)]
+    print len(quitters)
+    print len(activeUsers)
+    regularUsers = quitters + activeUsers
+
+    for user in regularUsers:
         responseSentiment[user] = []
         commentSentiment[user] = []
-        commentWithNoReponses[user] = 0
-        commentsForUser[user] = []
-        for comment in comments:
-            commentsForUser[user].append(comment)
-            commentDatesList.append(float(comment['created_utc']))
+        numComNoResp[user] = 0
+        nres = 0
+        ncom = 0
+        for comment in allcommentsForUser[user]:
+            if float(comment['created_utc']) > sofTimets:
+                continue
             numSubComments = lenSubComments(comment)
             if numSubComments == 0:
-                commentWithNoReponses[user]+=1
+                numComNoResp[user]+=1
             nres += numSubComments
             ncom += 1
             if SENT_ANALYSIS:
                 responseSentiment[user].append(getSentimentResponse(comment))
                 commentSentiment[user].append(vaderSentiment(comment.get('selftext').encode('utf-8')))
         numAvgResponses[user] = nres/ncom
-        commentWithNoReponses[user] = floor(commentWithNoReponses[user])/floor(ncom)
-        commentDates[user] = commentDatesList
-        lastCommentDates.append(max(commentDatesList))
+        numComNoResp[user] = floor(numComNoResp[user])/floor(ncom)
 
-    sofTimets = median(lastCommentDates)
-    sofTime = datetime.utcfromtimestamp(sofTimets)
-    print sofTime
 
-    for user in regularUsers:
-        if isActiveAfterSOFFor(commentDates[user], sofTime, 3):
-            activeUsers.append(user)
-        else:
-            quitters.append(user)
-        commentTextsForUser[user] = [comment["selftext"] for comment in commentsForUser[user] if float(comment['created_utc']) <= sofTimets]
-    quitters = quitters[:len(activeUsers)]
-    print len(quitters)
-    print len(activeUsers)
-    print "Quitters"
-
-    print "For Quitter Num No response : " , numpy.average([commentWithNoReponses[user] for user in quitters])
-    print "For Active Num No response : " , numpy.average([commentWithNoReponses[user] for user in activeUsers])
+    numComNoRespLQ = [numComNoResp[user] for user in quitters]
+    numComNoRespLA = [numComNoResp[user] for user in activeUsers]
+    print "Q # No response Mean: " , numpy.mean(numComNoRespLQ), "Median: ", numpy.median(numComNoRespLQ)
+    print "A # No response Mean: " , numpy.average(numComNoRespLA), "Median: ",  numpy.median(numComNoRespLA)
 
     if SENT_ANALYSIS:
         nc = 0
@@ -307,31 +324,24 @@ def findUsersWhoQuit(regularUsers, lm):
         print 'Active users: Avg sentiment of responses:', avg_sentiment/len(activeUsers)
         print 'Active users: comment result correlation:', avg_sentiment_correlation/len(activeUsers)
 
-    nr = 0
-    for user in quitters:
-        nr += numAvgResponses[user]
-    print 'Quitters num avg # response:', float(nr)/len(quitters)
-    nr = 0
-    for user in activeUsers:
-        nr += numAvgResponses[user]
-    print 'Active users avg # response:', float(nr)/len(activeUsers)
+    print 'Q avg # response:', numpy.mean([numAvgResponses[user] for user in quitters])
+    print 'A avg # response:', numpy.mean([numAvgResponses[user] for user in activeUsers])
 
     avgNumComQ = 0
     avgNumComA = 0
     avgNumCom = 0
     for user in quitters:
-        avgNumCom += len(commentTextsForUser[user])
-        avgNumComQ += len(commentTextsForUser[user])
+        avgNumCom += len(comTxtBeforeSOF[user])
+        avgNumComQ += len(comTxtBeforeSOF[user])
     for user in activeUsers:
-        avgNumCom += len(commentTextsForUser[user])
-        avgNumComA += len(commentTextsForUser[user])
-
-    print 'Num of comments: ', avgNumCom, avgNumComQ, avgNumComA
-    print 'Num users: ', len(quitters)+len(activeUsers), len(quitters),len(activeUsers)
+        avgNumCom += len(comTxtBeforeSOF[user])
+        avgNumComA += len(comTxtBeforeSOF[user])
+    print 'Num of comments (R Q A): ', avgNumCom, avgNumComQ, avgNumComA
+    print 'Num users (R Q A): ', len(quitters)+len(activeUsers), len(quitters),len(activeUsers)
     avgNumCom = avgNumCom/(len(quitters) + len(activeUsers))
     avgNumComQ = avgNumComQ/len(quitters)
     avgNumComA = avgNumComA/len(activeUsers)
-    print 'Avg num of comments: ', avgNumCom, avgNumComQ, avgNumComA
+    print 'Avg num of comments: (R Q A) ', avgNumCom, avgNumComQ, avgNumComA
     minAvgNumCom = min(avgNumComQ, avgNumComA)
 
     print "Language modeling"
@@ -346,10 +356,14 @@ def findUsersWhoQuit(regularUsers, lm):
     nWA = 0
     Q = []
     A = []
-    for user in quitters:
-        if user not in commentTextsForUser.keys():
-            continue
-        num_uw, frac_uw, num_tw, num_com, js_div = createUNiGramModelFromUserComments(user,commentTextsForUser[user][:minAvgNumCom], lm)
+
+    comTxtBeforeSOFQ = [comTxtBeforeSOF[user][:minAvgNumCom] for user in quitters]
+    comTxtBeforeSOFA = [comTxtBeforeSOF[user][:minAvgNumCom] for user in activeUsers]
+    pool = Pool()
+    ugramQ = pool.map(ugramModel, comTxtBeforeSOFQ)
+    ugramA = pool.map(ugramModel, comTxtBeforeSOFA)
+    for idx, user in enumerate(quitters):
+        num_uw, frac_uw, num_tw, num_com, js_div = ugramQ[idx]
         uniqueWords[user] = num_uw
         totalWordsConsidered[user] = num_tw
         numCommentsConsidered[user] = num_com
@@ -359,10 +373,10 @@ def findUsersWhoQuit(regularUsers, lm):
         nWQ += num_tw
         Q.append(user)
 
-    for user in activeUsers:
-        if user not in commentTextsForUser.keys():
-            continue
-        num_uw, frac_uw, num_tw, num_com, js_div = createUNiGramModelFromUserComments(user,commentTextsForUser[user][:minAvgNumCom], lm)
+    for idx, user in enumerate(activeUsers):
+        #if user not in comTxtBeforeSOF.keys():
+        #    continue
+        num_uw, frac_uw, num_tw, num_com, js_div = ugramA[idx]
         uniqueWords[user] = num_uw
         totalWordsConsidered[user] = num_tw
         numCommentsConsidered[user] = num_com
@@ -392,14 +406,18 @@ def findUsersWhoQuit(regularUsers, lm):
 
 
 
-def createUNiGramModelFromUserComments(user,comments, lm):
+def ugramModel(comments):
+    global lang_model
+    print '.',
+    sys.stdout.flush()
     commentTokens = list()
-    js_div = lm.jsdivergence(' '.join(comments))
+    js_div = lang_model.jsdivergence(' '.join(comments))
+    #js_div = 0
     for comment in comments:
         text = nltk.Text(word_punct_tokenizer.tokenize(comment.lower()))[:40]
         tempList = [i for i in text if i not in stop]
         commentTokens.extend(tempList)
-    return len(set(commentTokens)), float(len(set(commentTokens)))/(len(commentTokens)+1), len(commentTokens), len(comments), js_div
+    return (len(set(commentTokens)), float(len(set(commentTokens)))/(len(commentTokens)+1), len(commentTokens), len(comments), js_div)
 
 def measure_correlation(comment_sent, response_sent_list):
     avg_response_sent = []
@@ -421,6 +439,6 @@ def average(ll):
 
 
 if __name__ == "__main__":
-    regularUsers, lm = findAndStoreRegularUsers()
+    regularUsers = findAndStoreRegularUsers()
     print len(regularUsers)
-    findUsersWhoQuit(regularUsers, lm)
+    findUsersWhoQuit(regularUsers)

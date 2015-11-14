@@ -22,11 +22,11 @@ class LM:
             self.tf[gram] = self.tf.get(gram, 0) + 1
 
     def prob(self, gram):
-        return (self.tf.get(gram, 0)+self.alpha)/(self.num_grams + self.alpha * len(self.tf.keys()))
+        return (self.tf.get(gram, 0)+self.alpha)/(self.num_grams + self.alpha * len(self.tf))
 
     def entropy(self):
         e = 0
-        for gram in self.tf.keys():
+        for gram,_ in self.tf.iteritems():
             p = self.prob(gram)
             e += -p * math.log(p, 2)
         return e
@@ -37,17 +37,17 @@ class LM:
         tokens = [w for w in nltk.Text(tokenizer.tokenize(text.lower())) if w not in stop]
         ngram_list = [tuple(tokens[i:i+self.n]) for i in xrange(len(tokens)-self.n)]
         N = len(ngram_list)
-        d = len(self.tf.keys())
+        d = len(self.tf)
         for gram in ngram_list:
             freq[gram] = freq.get(gram, 0) + 1
-        for gram in self.tf.keys():
+        for gram,_ in self.tf.iteritems():
             prob[gram] = (freq.get(gram, 0) + self.alpha)/(N + self.alpha * d)
         return prob
 
     def crossentropy(self, text):
         qprob = self.distribution(text)
         e = 0
-        for gram in self.tf.keys():
+        for gram,_ in self.tf.iteritems():
             p = self.prob(gram)
             q = qprob[gram]
             e += -p * math.log(q, 2)
@@ -56,7 +56,7 @@ class LM:
     def kldivergence(self, text):
         qprob = self.distribution(text)
         kldiv = 0
-        for gram in self.tf.keys():
+        for gram,_ in self.tf.iteritems():
             p = self.prob(gram)
             q = qprob[gram]
             kldiv += -p * math.log(p/q, 2)
@@ -65,7 +65,7 @@ class LM:
     def jsdivergence(self, text):
         qprob = self.distribution(text)
         jsdiv = 0
-        for gram in self.tf.keys():
+        for gram,_ in self.tf.iteritems():
             p = self.prob(gram)
             q = qprob[gram]
             m = (p+q)/2
