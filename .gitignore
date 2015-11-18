@@ -1,5 +1,6 @@
 *.swp
 *~
+*.pyc
 Reddit/ProcessedData/*
 Reddit/RawData/*
 Reddit/Tmp/*
