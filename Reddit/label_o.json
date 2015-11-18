@@ -1,0 +1,1002 @@
+[
+ [
+  "b", 
+  "if ron paul chose mitt romney as his VP I think that'd work...", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "c", 
+  "No I'm saying they were successful popular movements.", 
+  {
+   "neg": 0.159, 
+   "neu": 0.362, 
+   "pos": 0.478, 
+   "compound": 0.6597
+  }
+ ], 
+ [
+  "b", 
+  "I'm going to guess you're in your 20s. This isn't a phenomenon independent only to the Obama presidency, you're just at an age that you're noticing it. It happened with the Bush's, Clinton, etc. The only difference I saw this time was some people *really* wanted to believe they had something different from every other politician. Especially following a particularly unpopular president. I think the amount of \"face-rubbing\" is going to be relatively proportional to the amount of gloating. No matter which party wins. ", 
+  {
+   "neg": 0.026, 
+   "neu": 0.887, 
+   "pos": 0.088, 
+   "compound": 0.6486
+  }
+ ], 
+ [
+  "b", 
+  "Yep, I'm in CT. I just wasn't sure if they did it mid-term. ", 
+  {
+   "neg": 0.139, 
+   "neu": 0.706, 
+   "pos": 0.155, 
+   "compound": 0.0613
+  }
+ ], 
+ [
+  "c", 
+  "Correct.", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "The fact that you keep referring to \"democrat\" when you mean \"republican.\"  It's okay that you are absolutely wrong.  It's a tricky subject.", 
+  {
+   "neg": 0.201, 
+   "neu": 0.726, 
+   "pos": 0.073, 
+   "compound": -0.5198
+  }
+ ], 
+ [
+  "a", 
+  "Probably one of the best defenses of the current status quo (which I disagree with) is that there is actually no discrimination going on, only perceived discrimination.  Nothing prevents a gay man from exercising the same right that a straight man has - both can marry a woman.  What the gay lobby is asking is for a creation of a new right, allowing a man to marry a man and a woman to marry a woman.  Not even straight people have those rights.\n\nThe difference is that the gay man is not attracted and has no interest in marrying a woman, but that is a matter of choice.  The logic here is that if we are extending the right to marry to anyone (as described above) then what justification is there to restrict based on other personal choices?  What if three men and two women want to be married as a single unit?\n\nNow, I find it compelling only because of the last argument.  Marriage should be a union between as many willing and consenting adults as they would like.  We have enough partnership law to use for divorce and arrangements, but would allow that to be superseded by pre- or post-nuptial agreements.  And if we are doing this for benefits and not on \"reproduction\" does the ban on incestuous marriage still make sense?  I love my sister more than many other people... if she needed health insurance, why couldn't we arrange a \"marriage\" so she could get it through my work?", 
+  {
+   "neg": 0.069, 
+   "neu": 0.801, 
+   "pos": 0.13, 
+   "compound": 0.8791
+  }
+ ], 
+ [
+  "b", 
+  "The best description might be authoritarian capitalist, but it is worth keeping in mind that China's government is heavily involved in the supposedly capitalist marketplace. Many big firms are outright owned by the government and the degree to which this is the case is debated.\n\nThe reason for the mixed messages is that the actual system is unclear.", 
+  {
+   "neg": 0.04, 
+   "neu": 0.881, 
+   "pos": 0.079, 
+   "compound": 0.3506
+  }
+ ], 
+ [
+  "b", 
+  "It is important to remember that there are many different rebel groups. We would not be arming all of them, but rather those that are most acceptable to us &amp; our allies/most conducive to a tolerant post-Assad Syria.", 
+  {
+   "neg": 0.031, 
+   "neu": 0.791, 
+   "pos": 0.178, 
+   "compound": 0.7302
+  }
+ ], 
+ [
+  "a", 
+  "Yes, it is.  \n\nIt's a pipeline that for all intents and purposes should be built (under existing law), but Obama is able to hold up based on the fact it crosses the border.  \n\nIt's a pipeline like the dozens if not hundreds of others that criss-cross our nation (and the world).  \n\nAnd it's a pipeline supported by a good chunk of his base (unions), and opposed by another (the environmentalists), which is why he has been sitting on it, refusing to either approve or reject.  He wouldn't put himself in a bad spot by doing either thing.  \n\nIt's a non-concession.  I wouldn't even go so far as to call it \"minor\".", 
+  {
+   "neg": 0.098, 
+   "neu": 0.803, 
+   "pos": 0.099, 
+   "compound": -0.2382
+  }
+ ], 
+ [
+  "b", 
+  "&gt; considering all the back-pay and waste that occurred due to the shutdown\n\nYou don't really think they care about that, do you? That would be moral.", 
+  {
+   "neg": 0.09, 
+   "neu": 0.8, 
+   "pos": 0.111, 
+   "compound": 0.1689
+  }
+ ], 
+ [
+  "a", 
+  "Riders have a benefit; they speed up bills getting passed by allowing them to combine multiple bills into one vote.\n\nI agree that sometimes controversial riders are added to other bills in an attempt to either sneak them through or cause the other bill to fail and that this is lame.\n\nHowever apparently politicians think the benefits outweigh the downsides.", 
+  {
+   "neg": 0.119, 
+   "neu": 0.762, 
+   "pos": 0.119, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "b", 
+  "No one can give you a non-biased explanation of socialism.", 
+  {
+   "neg": 0.216, 
+   "neu": 0.784, 
+   "pos": 0.0, 
+   "compound": -0.296
+  }
+ ], 
+ [
+  "b", 
+  "That is under the assumption that the single industry still exists. I agree that many cities, states, and even nations can survive on single industries, Hell Michigan in the early 1900's attests to that fact. However, GM is an 18th of what it once was in Michigan, and that is a generous figure. Plants (the ones that are still open) that used to run on 3,000 workers a day are now operating with 50 people. Bottom line is Michigan has to find a new industry but that is going to be hard to do with ghost towns, a broken infrastructure, ever growing crime, a collapsing school system, and an eviscerated tax base. They need a miracle. \n\nAnd like I said I'm not blaming either party. The Dems were in office when the economy collapsed and the Reps are in office now that they are trying to rebuild. As much as I hate Snyder he was given a turd to polish into gold. I don't care the banner of anyone's politics, there is no coming back from economic collapse on that scale, not quickly anyway. \n\nEdit: and for the \"not borrowing constantly bit\" Detroit and Michigan literally had no other option. You can't take a city with 2 million people, dwindle it down to 700,000, and think that those people are going to be able to support the city with 2/3rds of it's tax base missing. Even more if you consider the fact that the only people really left in Detroit are the poor. The tax base is more than likely to be closer to a 10th of what it once was. If Detroit didn't borrow to try and revive the city everyone would have had to just let the city fall into 3rd world conditions. Everyone would have had to have left. There wouldn't have been anyway to fund the police stations, fire stations, schools, trash pick-up, sewage, electricity, water infrastructure, public transportation,etc. etc. The only thing they can do now is destroy half the city, let nature retake it, and start over with what they have left. That is going to take an investment, and right now the state of Michigan isn't able afford the loans or the grants to do so. ", 
+  {
+   "neg": 0.138, 
+   "neu": 0.797, 
+   "pos": 0.064, 
+   "compound": -0.986
+  }
+ ], 
+ [
+  "b", 
+  "One of the examples used a situation where someone was rapidly dying and he called a doctor.  OP argued that because of the ethical distinction between harm via action and inaction, that the doctor would be doing nothing wrong if he let the person die because he didn't like the ethnic group the person belonged to.  As I understood it, he felt that because a doctor in such a situation is not technically \"harming\" the person then he should have the right to say \"instead of helping you I'm going to sit here and watch you bleed to death because you're [insert ethnic/religious/etc. group]\".", 
+  {
+   "neg": 0.154, 
+   "neu": 0.776, 
+   "pos": 0.069, 
+   "compound": -0.8707
+  }
+ ], 
+ [
+  "a", 
+  "&gt;No, it forces people to pay \n\nThe whole point is they get coverage without paying. I think you're confused how it actually works.", 
+  {
+   "neg": 0.156, 
+   "neu": 0.844, 
+   "pos": 0.0, 
+   "compound": -0.4019
+  }
+ ], 
+ [
+  "b", 
+  "Specifically, the referendum system in CA I think is a great case study for American Politics. Increases in benefits (e.g., school spending) easily passes while they also pass a hard cap on taxes (property taxes specifically). When people in CA are given the choice via referendums (obviously, they aren't given the choice on everything) they tend to choose lower taxes and higher benefits. Hence: huge debt.  \n\nedits: bad wordz choice and spelling", 
+  {
+   "neg": 0.115, 
+   "neu": 0.718, 
+   "pos": 0.167, 
+   "compound": 0.6597
+  }
+ ], 
+ [
+  "a", 
+  "These \"managed competition\" plans have been repeatedly tried in states and they always fail. Even with a mandate they fail because their risk pool tends to be sicker than the pool of employed people. Something called a death spiral occurs, the cost to the enrollees rises and the healthier people drop out, raising the price still more, eventually only the sickest remain, increasing the price still more. We absolutely cannot win with the insurance model. It can not be \"for profit\" and still be affordable.\n\nhttp://www.pnhp.org/resources/pnhp-research-the-case-for-a-national-health-program", 
+  {
+   "neg": 0.213, 
+   "neu": 0.787, 
+   "pos": 0.0, 
+   "compound": -0.9631
+  }
+ ], 
+ [
+  "b", 
+  "People outside the United States are not given the same constitutional protections.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.797, 
+   "pos": 0.203, 
+   "compound": 0.4215
+  }
+ ], 
+ [
+  "a", 
+  "Its almost impossible to accurately compare costs in the US and abroad because the US does not have huge funding for universities as most European countries do.  The entire system is foundationally different.  \n\nNow, I think there are things about the European system that the US needs to adopt (for one, I think we have too many universities in the US and ironically not enough competition because of that), but to say it only cost you $6500 for five years is ignoring the taxes others are paying to subsidize that education.", 
+  {
+   "neg": 0.054, 
+   "neu": 0.931, 
+   "pos": 0.015, 
+   "compound": -0.5692
+  }
+ ], 
+ [
+  "a", 
+  "It's particularly galling to me because this is a subreddit where answers can't be as easily proven (there's a reason our theses have hundreds of footnotes and are 100+ pages).\n\nAuthority in a field of hard science or math is easier to back up because someone can usually check your work. But if you claim to be an accountant and you're really just a high school kid who likes economics, you lessen the value and trustworthiness of the sub when you lie (I'm not accusing AuditorTux, just to be clear. I'm using him as an example of someone who would be harmed by a lie).\n\nIf you claim to work in government but you were really just an intern (or you just watch a lot of West Wing) it does and it should give your answers less credence unless you're willing to source your statements in detail (which should be the bar if you don't have credentials). \n\nEspecially in a sub where people make claims of expert knowledge there's a general acceptance of certainty as a barometer for truth, it seems reasonable to call out those people who clearly are bullshitting the people who come here to learn about politics.", 
+  {
+   "neg": 0.023, 
+   "neu": 0.858, 
+   "pos": 0.119, 
+   "compound": 0.9505
+  }
+ ], 
+ [
+  "b", 
+  "The shutdown is caused because the prior appropriations bill (continuing resolution) expired, so the federal gov't is no longer authorized to spend money.  Therefore, revenues in the general fund will continue to sit there until spent pursuant to an appropriations bill (the next cr).  Obviously, a chunk of general fund revenues will have to be appropriated to pay back expenses that are currently not being paid due to the shutdown.  ", 
+  {
+   "neg": 0.051, 
+   "neu": 0.949, 
+   "pos": 0.0, 
+   "compound": -0.3818
+  }
+ ], 
+ [
+  "b", 
+  "/r/HomeworkHelp ", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "the cost of regulatory compliance in this country already runs to [2 trillion dollars](http://archive.sba.gov/advo/research/rs264tot.pdf) a year, nearly 8000 dollars per employee, and it disproportionately affects small employers.  pilling more on top of that won't make things better.", 
+  {
+   "neg": 0.063, 
+   "neu": 0.883, 
+   "pos": 0.054, 
+   "compound": -0.0843
+  }
+ ], 
+ [
+  "c", 
+  "Right, and it's in contrast to naturalized citizenship.\n\nETA: The generally understood goal is/was to prevent someone who happens to be  good politician from naturalizing and becoming president while still having greater ties to a foreign country", 
+  {
+   "neg": 0.0, 
+   "neu": 0.835, 
+   "pos": 0.165, 
+   "compound": 0.6705
+  }
+ ], 
+ [
+  "a", 
+  "I've been a delegate to several county conventions and one state convention, and I was active in my precinct in Dallas. And I've been a poll-watcher, off and on, for a couple of decades. But I've never had the *slightest* ambition to run for office.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.937, 
+   "pos": 0.063, 
+   "compound": 0.4019
+  }
+ ], 
+ [
+  "a", 
+  "No.  Even if they miss the debt ceiling, it would be a while (few weeks, I think*) before the US actually defaults.  Even Boehner and his merry band of fools wouldn't let that happen.  I'd be shocked if they even let us hit the debt ceiling.  \n\n\\*Edit:  Maybe even longer since today is tax day for people filing extensions.  And that might not be included in the debt ceiling calculation since checks mailed today won't be processed by Thursday.  ", 
+  {
+   "neg": 0.188, 
+   "neu": 0.773, 
+   "pos": 0.039, 
+   "compound": -0.8834
+  }
+ ], 
+ [
+  "b", 
+  "As much as I love Super Dave Osborne, he's a sketch character (and funny as hell).  Everything is scripted and there isn't much actual risk.  Evel is dead because he was actually a stuntman.", 
+  {
+   "neg": 0.1, 
+   "neu": 0.603, 
+   "pos": 0.297, 
+   "compound": 0.8183
+  }
+ ], 
+ [
+  "a", 
+  "I don't write the laws. I just read 'em. And that's how I read it. ", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "Nowhere in my comement implies force towards Israel.  I meat just make a  a clear an public statement that Israel need to normalize its Atomic status.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.898, 
+   "pos": 0.102, 
+   "compound": 0.3818
+  }
+ ], 
+ [
+  "c", 
+  "&gt; As a Democrat, I hope they hold this grudge forever\n\nI will drink to that, my friend.  ", 
+  {
+   "neg": 0.0, 
+   "neu": 0.681, 
+   "pos": 0.319, 
+   "compound": 0.7269
+  }
+ ], 
+ [
+  "b", 
+  "And if it ever passed and wound up in the Supreme Court, it would probably be struck down as unconstitutional. But as it stands now, bills that are signed into law are presumed constitutional until someone has standing to challenge their constitutionality.", 
+  {
+   "neg": 0.044, 
+   "neu": 0.85, 
+   "pos": 0.107, 
+   "compound": 0.4404
+  }
+ ], 
+ [
+  "b", 
+  "As a strong proponent of the current system, I'll bite.\n\nWe don't need voting system reform because the current system is the best for the needs of the United States. Single-Member District Plurality (also called First Past the Post) gives individual representatives the freedom to represent the interests of their district before the interests of their political parties. What basically happens is that coalitions between ideological factions happen before the elections instead of after them like other systems.\n\nProportional Representation systems (like Germany, Italy, and France) cause the country to be ruled unilaterally by a single ideological group that the majority of the country voted against. It also breeds political radicalism that tends to be contained by restricting freedom of speech. There are more ideological groups holding seats in the legislature, but only one dictating policy.\n\nAlternative voting methods like Instant-Runoff Voting or Cumulative Voting tend to create governments with the negative aspects of both SMDP and PR. They create larger third parties that are able to hold seats but not affect policy while the two main parties turn into ideological monoliths rather than the vague associations they are in SMDP. This causes a stagnant political atmosphere that polarizes the country.\n\nOne thing to always keep in mind is that between 10-20% of the population in most liberal democracies is bigoted xenophobic nationalists. In systems like the US, this demographic either doesn't vote or votes Republican and the party maybe throws out a few comments to pander to the voter base but ultimately doesn't dictate policy based on their ideology. In France, this bloc forms a political party called the National Front that has a significant influence on policy. It also drags the center-right party to adopt more radical stances to take their voters and keep the radical party's power down. In Germany, this group is repressed by restrictions on civil liberties and occasionally riots in the streets. Systems that favor centrism tend to work out better for the people living in them.\n\nThe problem with voting in the US is that people in the current generation never learned how to use the system. Since coalitions are formed prior to the elections, primary elections are extremely important in affecting policy. The Tea Party is an excellent case study in how to actually affect policy in the US. They did everything right, including forwarding candidates within the Republican party, making sure those candidates were elected via primary elections, and making incumbent Republicans pander to their ideology.\n\nI'll admit I'm a little intoxicated right now, so I might not have explained things completely. Feel free to ask for clarification on anything.", 
+  {
+   "neg": 0.042, 
+   "neu": 0.782, 
+   "pos": 0.176, 
+   "compound": 0.9963
+  }
+ ], 
+ [
+  "b", 
+  "The unusual aspect of this year's response was that the Tea Party (Rand Paul) felt it necessary to give a separate [response](http://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=4&amp;ved=0CEEQFjAD&amp;url=http%3A%2F%2Fwww.mediaite.com%2Ftv%2Fwatch-live-rand-paul-delivers-tea-party-response-to-state-of-the-union-2013%2F&amp;ei=2zscUa36DYSfiAKYg4C4BA&amp;usg=AFQjCNEeoBWyDGboQPuTyth2ImAREA9oFA&amp;bvm=bv.42452523,d.cGE]).\n\nThe GOP is disintegrating.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.899, 
+   "pos": 0.101, 
+   "compound": 0.4019
+  }
+ ], 
+ [
+  "c", 
+  "excellent replies so far. i would echo that media consolidation and the ability for people to isolate themselves in partisan media and social bubbles are a main driving factor for this.\n\nas much as it saddens me, i see our citizens identifying less and less and \"american\" and more and more as ethnic, ideological, or regional identities. i fully expect parallel cultures to continue to form for these solidifying identities as well.", 
+  {
+   "neg": 0.062, 
+   "neu": 0.831, 
+   "pos": 0.107, 
+   "compound": 0.5267
+  }
+ ], 
+ [
+  "a", 
+  "down voted and ignored as straw man.", 
+  {
+   "neg": 0.277, 
+   "neu": 0.723, 
+   "pos": 0.0, 
+   "compound": -0.3182
+  }
+ ], 
+ [
+  "b", 
+  "The average SS benefit is $1,230/mo or $14,760/yr.  That seems like a good starting point to me, especially if you'd assume that single payer healthcare would come before guaranteed income, so you wouldn't have to pay health insurance out of that amount.  You'd probably want to put in some sort dependent allowance as well for families.  ", 
+  {
+   "neg": 0.0, 
+   "neu": 0.789, 
+   "pos": 0.211, 
+   "compound": 0.8778
+  }
+ ], 
+ [
+  "b", 
+  "You do know that you can opt out, right?", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "&gt; Because the pensions were not funded correctly over the past twenty-something year, those who are depending on that pension are going to be forced to take less than what they were promised.\n\nYes, because Detroit is a mess. Do you want examples of countries where workers have rights in which things work out just fine? Correlation != causation, especially when your sample size is one.\n\n&gt; Perhaps not socialism, but Detroit has been a pretty-much one-party town for a long, long time. And its inability to fund the pension is a problem for anyone who wants to see promises kept, whether libertarian or communist.\n\nSo are many successful and unsuccessful cities and states. Besides, we all know both US parties are very large tents - one party rules, but there are very different factions within that party fighting in the primaries.  \nBTW, I hope you don't seriously believe that Democrats are socialist.", 
+  {
+   "neg": 0.096, 
+   "neu": 0.715, 
+   "pos": 0.189, 
+   "compound": 0.9404
+  }
+ ], 
+ [
+  "b", 
+  "Look at nations like Finland, Germany, UK, Japan, Australia, Mexico, the majority of south American countries, and the majority of African countries that have stricter abortion laws than the US.\n\nLook at Austria, Germany, Greece, Ireland, Poland, UK, Israel, India, and almost every single 3rd world nation that teach religion in public schools.\n\nLook at the 25 countries that have compulsory military service.\n\nWhile the US does not have federally recognized gay marriage it does have state recognized gay marriage, which is more than 90% of the other countries in the world.\n\nWhat are these objective measures (outside of prostitution which is legal in portions of the country) that the US is more conservative than the rest of the world?", 
+  {
+   "neg": 0.0, 
+   "neu": 0.967, 
+   "pos": 0.033, 
+   "compound": 0.4588
+  }
+ ], 
+ [
+  "b", 
+  "So why would they ever accept the pardon?", 
+  {
+   "neg": 0.0, 
+   "neu": 0.55, 
+   "pos": 0.45, 
+   "compound": 0.5994
+  }
+ ], 
+ [
+  "a", 
+  "&gt; One could argue it wouldn't be \"fair\" for them\n\nOne could make a better argument that if it's not slashed their gravy train might just derail, and us paying into it for years to decades without any hope of *ever* seeing a penny in return because of that derailment is even *more* unfair.", 
+  {
+   "neg": 0.203, 
+   "neu": 0.724, 
+   "pos": 0.073, 
+   "compound": -0.7929
+  }
+ ], 
+ [
+  "a", 
+  "The China part is factually incorrect, the Keystone Pipeline (from Alberta to Texas) is in direct competition with the planned Northern Gateway pipeline which will go from Alberta to shipping units on the Canadian shore to China. ", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "b", 
+  "&gt;Because deep congressional corruption started about the time the first founders were dead\n\nIt didn't even take that long: http://en.wikipedia.org/wiki/Alien_and_Sedition_Acts", 
+  {
+   "neg": 0.185, 
+   "neu": 0.815, 
+   "pos": 0.0, 
+   "compound": -0.6486
+  }
+ ], 
+ [
+  "c", 
+  "&gt;I'm trying to explain to you that it is not inherent in the question, and that it is relevant to figuring out how to adequately answer the question.\n\nthe first clue is \"Putting aside for a moment the question of whether or not we should;\" the entire question starts off with a limiting clause, and finishes with \"on average\" indicating that getting hung up on specific nuances of the question is not what the author intends.\n\ni presented a logical explanation that shows that, using the totality of the circumstances, the OP isn't looking for (and doesn't want) the level of analysis you're attempting to give to it, and would rather have the reader utilize his own judgement in answering the questions you present.  There's no evidence that the answer anyone gives will be heavily scrutinized or attempts will be made to have the answer discredited, so not only is knowing the answer to those questions not necessary to answer them, but there's also absolutely no reason one couldn't give more than one answer, perhaps one for number for a subsistence wage and another number for \"above poverty level\" wage.\n\nre: upvotes, this is how reddit works.  It's not exactly the Doha Debates here, its a bunch of people on the internet with a reasonable understanding of the English language and an email address.  Luckily the people here tend to be smarter, better versed, and more experienced in the political arena than the general public. (ie. /r/politics) \n\n", 
+  {
+   "neg": 0.042, 
+   "neu": 0.899, 
+   "pos": 0.059, 
+   "compound": 0.6597
+  }
+ ], 
+ [
+  "a", 
+  "Quote me where I said this was an absolute. (And those assumptions still hold, but let's assume arguendo that you're correct). Also, you *still* have not offered an actual, real-world counter claim. \n\nTo repeat: Moderate politicians win elections because their policy positions are closer to a larger number of voters. Therefore, by definition, moderate politicians are more popular. This speaks nothing to how motivating a candidate is, or how personable that candidate is. A moderate politician is more likely to win an election. ", 
+  {
+   "neg": 0.037, 
+   "neu": 0.792, 
+   "pos": 0.171, 
+   "compound": 0.9267
+  }
+ ], 
+ [
+  "b", 
+  "1.  In my ideal world, they would be awfully close.  Seeing how I'm libertarian, the issue of government forcing people to do things against their will is a lot easier to prevent than in one with a strong, all-encompassing government.  \n2.  Yes - just because you have a belief does not mean you can instill that on others.  For example, even if your political belief that anyone wearing fur should be immolated, you would still be arrested and tried for assault/murder.  Your rights end at my nose.  This kind of also answers #3.\n\nBut step back and think about it - lets take climate change for example.  99% of the people on both sides of the issue have *no clue* about the state of the science behind it.  Both pro- and con-.  Instead, they listen for a select set of people to tell them the status of the debate, then go and use that as their basis point (their preachers).  And, in this case, we even have an indulgences, in the form of carbon credits (or whatever they're called now).  The few people that do actually argue the science are arguing on a level few outside their circle would get... and often times its minutia (how much smoothing is too much/how many angels on the head of a pin?).", 
+  {
+   "neg": 0.037, 
+   "neu": 0.885, 
+   "pos": 0.078, 
+   "compound": 0.802
+  }
+ ], 
+ [
+  "a", 
+  "Nothing in your link contradicts what I've said, and none of it suggests that independent expenditures can donate directly to campaigns and political parties. So called \"SuperPACs\" in reality share no legal similarities to PACs, who *can* donate to candidates and parties.\n\nI'm not trying to argue the system is without flaws, but please *stop spreading falsehoods*. Citizens did nothing at all to change donation limits and yet countless people think it did. Please, there are enough misinformed people out there without you adding to it. ", 
+  {
+   "neg": 0.095, 
+   "neu": 0.79, 
+   "pos": 0.115, 
+   "compound": -0.0323
+  }
+ ], 
+ [
+  "a", 
+  "Short answer: No.\n\nLong answer: Hell, no.\n\nAnd Bobby is hardly one to be calling the party irrelevant and stupid.", 
+  {
+   "neg": 0.412, 
+   "neu": 0.498, 
+   "pos": 0.09, 
+   "compound": -0.8658
+  }
+ ], 
+ [
+  "a", 
+  "Able bodied people don't get disability. Only quite disabled people get it, and the money they receive is quite small, it is not exactly generous, its barely enough to live on. \n\nIn the city I used to live in I would regularly go for long walks in the early morning when it was quiet and I would regularly see well dressed older and often, quite disabled looking people going through the garbage from restaurants. If the money they got from disability was generous, those people would not be doing that. That kind of activity is the kind of thing that people who are almost starving do.", 
+  {
+   "neg": 0.073, 
+   "neu": 0.908, 
+   "pos": 0.019, 
+   "compound": -0.7014
+  }
+ ], 
+ [
+  "b", 
+  "\nDefense: 90%, Transportation (interstate highways): 5%, Administration: 5%\n\nAnnual Federal budget: $100B\n\nseems feasible...", 
+  {
+   "neg": 0.0, 
+   "neu": 0.897, 
+   "pos": 0.103, 
+   "compound": 0.128
+  }
+ ], 
+ [
+  "c", 
+  "Thanks for your insightful opinion. ", 
+  {
+   "neg": 0.0, 
+   "neu": 0.58, 
+   "pos": 0.42, 
+   "compound": 0.4404
+  }
+ ], 
+ [
+  "b", 
+  "2A wasn't written due to a \"fondness of firearms,\" it was written as a recognition of one's right to self-defense. ", 
+  {
+   "neg": 0.0, 
+   "neu": 0.829, 
+   "pos": 0.171, 
+   "compound": 0.5423
+  }
+ ], 
+ [
+  "b", 
+  "\"no taxation without representation!\" \"ok.\"", 
+  {
+   "neg": 0.384, 
+   "neu": 0.616, 
+   "pos": 0.0, 
+   "compound": -0.3595
+  }
+ ], 
+ [
+  "b", 
+  "I posted this below, as well, but you will find the pricing explanation [here](http://www.thenation.com/blog/168011/keystone-xl-will-increase-gas-prices-explained)", 
+  {
+   "neg": 0.0, 
+   "neu": 0.886, 
+   "pos": 0.114, 
+   "compound": 0.1406
+  }
+ ], 
+ [
+  "b", 
+  "I said it lower down, but I'd note that a member can be expelled for any (or no) reason by a majority vote.  \n\nSo it's not 100% accurate that they enjoy \"absolute freedom\"; they just can't be criminally prosecuted. But they can certainly be tossed from the House or Senate. ", 
+  {
+   "neg": 0.073, 
+   "neu": 0.746, 
+   "pos": 0.181, 
+   "compound": 0.795
+  }
+ ], 
+ [
+  "b", 
+  "&gt;the trickle down effect\n\nDid you know that Herman Cain also invented pizza and rides a unicorn to work?", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "The greedy bankers and greedy brokers all took advantage of the people who felt they were missing out and wanted a piece. If those people hadn't signed those contracts, those greedy bankers don't make a commission. So without thinking about what they were signing, they put their house at risk and gave the bankers a bonus. ", 
+  {
+   "neg": 0.179, 
+   "neu": 0.734, 
+   "pos": 0.088, 
+   "compound": -0.5719
+  }
+ ], 
+ [
+  "b", 
+  "Go read anything about California's legislature.", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "Sustainability never happens in the wild. In the wild you dump your garbage in your neighbors yard.", 
+  {
+   "neg": 0.14, 
+   "neu": 0.86, 
+   "pos": 0.0, 
+   "compound": -0.3818
+  }
+ ], 
+ [
+  "b", 
+  "A governor rather than a congressman, but Chris Christie is a recent example.  He sold out his party in order to receive huge dollars for Hurricane Sandy relief.  Of course, he's also in a liberal state, so he needs to appear more liberal for his own re-election.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.79, 
+   "pos": 0.21, 
+   "compound": 0.8922
+  }
+ ], 
+ [
+  "b", 
+  "&gt; If this was the case, should we have allowed the confederacy to secede because they believed the government was tyrannical?\n\nYes, but that's a tenth amendment question and outside the scope of the current discussion.\n\nEDIT below...\n\n&gt; I hear this a lot, that the second amendment is there to protect us against a tyrannical government, but never found any basis outside of federalist papers.\n\nThe people who wrote it said that's why they wrote it. I don't see why you wouldn't believe that.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.937, 
+   "pos": 0.063, 
+   "compound": 0.6428
+  }
+ ], 
+ [
+  "b", 
+  "My fiscal conservative view is that income inequality is simply a facet of productivity inequality. Addressing the issue is like trying to treat a fever by wiping up sweat, and completely irrelevant.\n", 
+  {
+   "neg": 0.0, 
+   "neu": 0.843, 
+   "pos": 0.157, 
+   "compound": 0.6369
+  }
+ ], 
+ [
+  "a", 
+  "If your economy is not dependent on trade, it does not matter. \n\nApparently your understanding of economics is more limited than I assumed.", 
+  {
+   "neg": 0.14, 
+   "neu": 0.86, 
+   "pos": 0.0, 
+   "compound": -0.3109
+  }
+ ], 
+ [
+  "c", 
+  "Short answer, living in America is pretty damn nice, for all that goes on we don't have that much to complain about (not most of us anyways), and we are generally unwilling to risk our mostly comfortable lives for abstract concepts or minor improvements.", 
+  {
+   "neg": 0.131, 
+   "neu": 0.662, 
+   "pos": 0.208, 
+   "compound": 0.6486
+  }
+ ], 
+ [
+  "b", 
+  "Iron Dome specifically is designed for smaller missiles and mortars, not bigger missiles.  They have another system for bigger missiles (http://en.wikipedia.org/wiki/Arrow_%28Israeli_missile%29).", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "b", 
+  "&gt;Militarily, China is far more powerful than Japan.\n\nThis is true, except for the fact that the US would rush to their aid.  Japan, more than most allies, is under US protection due to the treaties signed after WW2, so it is pretty crazy to just ignore that in your scenario.\n\nJapan has a very small military precisely because of the treaties with the US so they would be no match for China, especially a China that is ramped up for wartime.  China can much easier force companies to abandon civilian pursuits like ship building and turn them into military shipyards.\n\nIf it turned into anything more than a little skirmish in the open waters then China probably would be boycotted/blockaded by the West.\n\nChina really isn't needed in the world as much as people think.  They produce a ton of goods but a huge chunk is consumer goods that people could do without for a while.  Transnational companies would rush to open plants and factories in other countries but in the mean time their might be a run on toasters that cost $9.99 at Wal-Mart.  Countries don't like being beholden to others, it is part of why the US has a Strategic Oil Reserve just sitting in tanks.  Most countries could live for a while without Chinese goods.", 
+  {
+   "neg": 0.032, 
+   "neu": 0.896, 
+   "pos": 0.072, 
+   "compound": 0.8413
+  }
+ ], 
+ [
+  "c", 
+  "&gt;Perfect example of what I'm talking about. That bill was filibustered exclusively by Republicans. The Democratic party is not your enemy here.\n\nAnd in the subsequent years? The Democratic party is clearly disinterested in anything beyond superficial attempts as federal election reform. That his bill makes it into the legislative agenda only when the democrats don't have a supermajority (and the incentive structure) is very telling.\n\nRepublicans aren't doing the issue any favors either, but the notion that one ought to legitimize the unacceptable behavior of one group because they oppose a slightly more scary monster doesn't make much sense to me. What is accomplished?\n\n&gt;Those seats are only \"safe\" insofar as past demographics and voting patterns continue to be a good predictor of future election results. If people like you decide to vote, it would alter the percentage of likely voters, making districts less safe for incumbents.\n\nThat would be true if there weren't significant barriers to entry monetarily or if the problem with gerrymandering was about incumbency. The problem with gerrymandering is that it disenfranchises voters (and thereby undermines the legitimacy of the government.) Even so, what is meant by 'people like me'? People who don't vote in federal elections? Well I made clear that I would vote for an acceptable candidate so I'm not clear on what your point is about that.\n\nEDIT: [SPEAKING OF DEMOCRATS LOOK WHAT I FOUND ON R/ALL](http://i.imgur.com/J9Zgd84.jpg)", 
+  {
+   "neg": 0.075, 
+   "neu": 0.759, 
+   "pos": 0.166, 
+   "compound": 0.9682
+  }
+ ], 
+ [
+  "b", 
+  "Why?  I have a liberal arts degree. I've driven trucks, cleaned public rest rooms, washed dishes in busy restaurants, worked the graveyard shift at gas stations.  ", 
+  {
+   "neg": 0.087, 
+   "neu": 0.913, 
+   "pos": 0.0, 
+   "compound": -0.296
+  }
+ ], 
+ [
+  "b", 
+  "possible solution, but, as I said, an extremely unusual one.  most of the time medicaid refuses such waivers, leaving the states in exactly the position I described.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.936, 
+   "pos": 0.064, 
+   "compound": 0.1655
+  }
+ ], 
+ [
+  "b", 
+  "Open your mind further than gun violence, and you see that violence in general has increased, dramatically. Criminals just move to alternative weapons, while victims are left without the most effective defense. ", 
+  {
+   "neg": 0.453, 
+   "neu": 0.468, 
+   "pos": 0.079, 
+   "compound": -0.9606
+  }
+ ], 
+ [
+  "b", 
+  "There are already problems with desertion, I'm not sure this would be the case.", 
+  {
+   "neg": 0.28, 
+   "neu": 0.72, 
+   "pos": 0.0, 
+   "compound": -0.5664
+  }
+ ], 
+ [
+  "b", 
+  "Two points.\n\n*   The issue is that where Medicaid was not expanded that the ACA made the *existing programs* for the poor illegal. If a woman in TN has breast cancer and only makes $13k she cannot get Medicaid and **she loses the state program as well**. Another woman in New York of equal circumstances gets treated (with federal taxes in part paid in TN). The ACA prohibits her state from helping her get treated. The question is if the ACA may constitutionally require the woman in TN to just die? Is this equal access per the 14th Amendment? Tennessee says that the ACA is just too expensive for it to afford.\n\n\"*The director of InterFaith Health Clinic said that even with the health insurance exchanges that are now enrolling and take effect Jan. 1, a \"huge chunk\" of people who seek care at InterFaith will remain uninsured. \nThat's because their income is too high to qualify for TennCare and too low to qualify for the exchanges -- the segment of the population that would have been covered by Medicaid had Tennessee chosen to expand Medicaid*\" http://insurancenewsnet.com/oarticle/2013/10/19/medical-clinics-brace-for-changes-under-aca-%5Bthe-knoxville-news-sentinel-tenn%5D-a-406888.html#.UsiCIrQ6zXQ\n\n*   Indiana says that the ACA would require Indiana to divert money from schools to health care if they accepted it. All of the states will likely have to reduce school funding to pay for ObamaCare if they accept it, so this is a legitimate point. Do we agree that few states have that much cash lying around, that most will need to shift education funds? 63% of their budget goes to education. The ACA would cost Indiana $1.4 billion. **Most (or all) of that $1.4 billion would come from the $18.6 billion school budget.**\n\n\"*Indiana spends about 63 percent of its budget on education. Last year, the General Assembly increased education funding to restore cuts made during the worst of the recession... Currently, one out of six Indiana residents is on Medicaid, or about 1.1 million Hoosiers. Medicaid takes up 14 percent of the state's budget. Under the federal Affordable Care Act (or Obamacare), Indiana can expand Medicaid to cover more uninsured Hoosiers at a projected cost to taxpayers of more than $1.4 billion by 2020. This expansion could allow one in four Indiana residents to enroll in the program.\"* http://www.newsandtribune.com/opinion/x1186901799/GROOMS-State-senator-seeks-input-on-legislative-topics\n\nDo you still need any support on the claims made?", 
+  {
+   "neg": 0.072, 
+   "neu": 0.844, 
+   "pos": 0.084, 
+   "compound": 0.3094
+  }
+ ], 
+ [
+  "b", 
+  "I've seen people that would surprise you miss that in campaign lit.  \n\nIn part because realistically, the D and the R could well be using the same (union) print shop.  They'll put the bug on or leave it off depending on preference.  \n\nFor instance, on the Hill - D offices have the bug on their business cards.  R offices (generally) don't.  \n\nEven though all the cards are printed at the same place (by the GPO).  ", 
+  {
+   "neg": 0.038, 
+   "neu": 0.905, 
+   "pos": 0.057, 
+   "compound": 0.34
+  }
+ ], 
+ [
+  "a", 
+  "It's hard to dispute that Fox News not only reports with a conservative bias, but that they also have a track record of taking a lot of license with the facts they choose to report. However, I think that the assertions that it's \"propaganda\" are at least a little bit misguided.\n\nI think that the fact they're using their news outlet to push an agenda is only a half-truth. The real reason they report the news with a heavy bias and are often accused of simply falsifying facts is primarily due to the fact that there is a sizable demographic of Americans who turn on the news not to be informed but rather to hear exactly what they want to hear. Therefore, it's a smart business decision to cater to that audience by giving them only the news that they want to hear in the way that they want to hear it, because that's what keeps them coming back. \n\nThe sad fact of the matter is that good, honest journalism simply isn't profitable anymore, at least in the United States, and you see the effects of that across all of the major TV news outlets. The current trend in TV news is to turn it into an entertainment program for the masses to enjoy and consume rather than an educational program of sorts designed to distribute facts and information. Each news outlet has their own particular business model to bring in the ratings that works for them, but Fox News, and to a certain extent MSNBC, get a lot more flack than some of their other counterparts because of the heavy political demographic targeting that they do, which leads them to have a much more biased, and often much less honest, broadcast.", 
+  {
+   "neg": 0.06, 
+   "neu": 0.816, 
+   "pos": 0.124, 
+   "compound": 0.9692
+  }
+ ], 
+ [
+  "c", 
+  "this is very true.  While 250 or so transnational corporations control something like 80% of the world's wealth, if those corporations went under (and Lehman Brothers and Goldman Sachs were two of them), then due to the interconnected nature of corporate ownership, it doesn't take much to send the entire economy reeling.  So \"control\" is a very difficult term to understand.\n\n", 
+  {
+   "neg": 0.041, 
+   "neu": 0.829, 
+   "pos": 0.13, 
+   "compound": 0.7184
+  }
+ ], 
+ [
+  "a", 
+  "Okay, you don't know how to read a sentence.\n\n\"You could always threaten [at some unstated point and in some unstated manner] to leave him [which would then take place] very loudly and publicly if he does it again.\"\n\nAnd I'm not a karma-collector.", 
+  {
+   "neg": 0.084, 
+   "neu": 0.844, 
+   "pos": 0.071, 
+   "compound": -0.1531
+  }
+ ], 
+ [
+  "c", 
+  "The further AuditorTux's point, which is 100% accurate, this interpretation was discussed in length during the DC v Heller Supreme Court case in 2008. The Supreme Court ruled:\n\n&gt; The Second Amendment protects an individual right to possess a firearm unconnected with service in a militia, and to use that arm for traditionally lawful purposes, such as self-defense within the home.\n\nSo until a constitutional amendment is passed, or a different Supreme Court ruling, US citizens have the right to own firearms for their own personal self defense (as well as other reasons). The [wiki](https://en.wikipedia.org/wiki/District_of_Columbia_v._Heller#Decision) does a good breakdown of the decision and why it was made.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.827, 
+   "pos": 0.173, 
+   "compound": 0.9559
+  }
+ ], 
+ [
+  "b", 
+  "What is it that you're interested in doing, professionally? ", 
+  {
+   "neg": 0.0, 
+   "neu": 0.748, 
+   "pos": 0.252, 
+   "compound": 0.4019
+  }
+ ], 
+ [
+  "b", 
+  "yeah but wasn't the ceo of papa Johns a vocal Obama hater?", 
+  {
+   "neg": 0.259, 
+   "neu": 0.629, 
+   "pos": 0.112, 
+   "compound": -0.4767
+  }
+ ], 
+ [
+  "a", 
+  "Your link is about *wealth* inequality, not income.  Wealth inequality is to be expected - that's assets less liabilities.  And since we're a credit-addicted society, the majority of Americans have absolutely no net worth.  Here's a [good look](http://www.epi.org/files/page/-/BriefingPaper292.pdf).  The median net worth for whites in in the 2000s barely broke $50k, blacks were horribly lower.  Go down to page 21 which shows debt as a percent of household wealth.  Its doubled in the last 50 years.  And remember, interest comes with it, which actually reduces your spending power in the future (debt is actually borrowing from your future self).\n\nBut back to the main point - if no one is harmed by me making an extra $1, is it really a bad thing?", 
+  {
+   "neg": 0.189, 
+   "neu": 0.724, 
+   "pos": 0.087, 
+   "compound": -0.9245
+  }
+ ], 
+ [
+  "b", 
+  "I think that's fair, but either way my post was at least adjacent to the topic OP brought up.\n\nBut for the third point,\n\nA. Terrorism fatalities post and pre-9/11 have been approximately the same, while spending on counterterrorism measures has [mushroomed to cold war levels](http://www.washingtonpost.com/blogs/ezra-klein/files/2012/08/csbachartmon.png) post-9/11. The government has spent [trillions](http://upload.wikimedia.org/wikipedia/commons/5/55/U.S._Defense_Spending_Trends.png) of dollars as efforts associated with global war on terror operations. Terrorism has become the focal point of US foreign policy with our society now prepared against the threat of terrorism. It would be reasonable to suggest that with the massive shift in resources and focus dedicated to fighting terrorism there would be an appreciable drop in terror fatalities. \n\nB. But even when the IRA was active they failed to reach the UK's threshold for actionable fatalities. The IRA conflict was responsible for ~57 deaths per year, given the UK population, it would have to be 63 deaths per year. Now we should expect atleast some of al qaeda forces to target the UK, and they have. But the UK still has approx the same fatalities as the US while massive disparities in defense spending.", 
+  {
+   "neg": 0.321, 
+   "neu": 0.613, 
+   "pos": 0.066, 
+   "compound": -0.9977
+  }
+ ], 
+ [
+  "c", 
+  "&gt; It's hard to believe that his personal stance is not the sole reason for his stance on gay marriage and the war on drugs.\n\nI'm sure it is. But personal stance does not necessary map to a policy stance when everyone knows that we need fewer (not more) laws.\n\n&gt; \n&gt; He just doesn't seem like the type that would vote based on the voice of the people.\n\nMaybe. I obviously haven't crawled around his cranium, and I think the president is in a hard spot with determining the will of the people ... because it keeps changing, and he has to represent everybody. And he can't really force the house to draft any particular bills anyway. But, I think \"the will of (all) the people\" is sometimes served by directly answering the questions asked, and not to \"flip flop\" (your phrase). IF he doesn't believe that the government has any right to tell people how to live their personal lives, he's likely (from MA, for good ness sake) to be pretty hands-off on this stuff.\n\nAnd, by the way, I'm not trying to argue with you. I don't/didn't like him either. I think any support I may have ever felt was along the lines of \"Well, I don't know what he's about, but it can't be worse than the known quantity dude.\". And, I kind of lean libertarian-ish, which means that small/constrained government is probably my #1 or #2 issue.\n\nThanks for replying and for being so open!", 
+  {
+   "neg": 0.031, 
+   "neu": 0.897, 
+   "pos": 0.071, 
+   "compound": 0.8779
+  }
+ ], 
+ [
+  "b", 
+  "Hate to break it to you, but the U.S government was made with that in mind. The Senate is specifically isolated from the people by having longer terms, supreme court is sheltered from the people, as is the president with terms of 4 years. A lot of the U.S government was made because will of the people can easily become rule of the mob and tyranny of the majority.", 
+  {
+   "neg": 0.069, 
+   "neu": 0.826, 
+   "pos": 0.105, 
+   "compound": 0.5719
+  }
+ ], 
+ [
+  "a", 
+  "It's not really comparable. The European political spectrum has shifted far away from their Atlantic cousins.\n\nEven the most rightwing politicians would **never** argue for getting rid of universal healthcare, nor about dropping the tax down to about half of what it is here. But that doesn't solely mean it's leftwing, as the right still want to cut gov't spending.", 
+  {
+   "neg": 0.072, 
+   "neu": 0.908, 
+   "pos": 0.021, 
+   "compound": -0.4939
+  }
+ ], 
+ [
+  "b", 
+  "with neither ever being elected.", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "I disagree with the premise (as a former FiDi resident and a lawyer). Occupy moved the ball forwards on a number of issues -- it's not a trivial victory that, in the months after Occupy started, House Republicans actually started to talk about economic equality as something serious. Occupy may not have forced any real change, but they did flag serious issues that are now getting serious consideration, in a more real way than they did before. \n\n(Note that, despite electing a few congressmen and attaining wider visibility, the Tea Party hasn't been any more successful than that.)\n\nThat said, there are a number of things that should have been done differently to maximize impact, but they're all problems inherent in a quasi-anarchic movement.\n \n* Occupy needed a leader who could talk to the press.\n\n* Occupy needed a leader who could define specific goals.\n\n* Occupy needed to advertise those goals.\n\n* Occupy needed a leader who could keep out the riff-raff -- i.e., people who just went to Zuccotti Park to smoke weed, commit crimes, or otherwise be creepy. I walked through/by Zuccotti commonly, and anyone who was there knows where that group was (towards the back, by the WTC). That made the movement all-too-easy to villify. Occupy also lost cohesion once it was infected by communists, Paul supporters, and anti-Semites (see below). \n\n* Occupy needed to excise any outright allegiance with atheism, Marxism, communism, and true socialism (state ownership of the means of production). This is not a society ready to toss out The System. This is a society ready to reform the system. Outright revolution is justly ridiculed. \n\n* Occupy did a good job cleaning up the park, and making the space livable. But they needed to do better. They lost support from the neighbourhood once the near-24-hour-drum-circle started up. Seriously, many of my friends living within a few blocks had to wear earplugs to sleep, for months. That's just one example.\n\n* Occupy needed to not do dumb marches that would inevitably end in arrests. \n\nFrom that, I conclude that quasi-anarchic movements should not be things. A (1) well-organized, (2) clearly-focused, (3) presentable, (4) left-leaning-but-not-Marxist group that (a) had lobbyists, (b) friends in government, (c) clear, legal, and implementable demands was doable and would have gone farther. ", 
+  {
+   "neg": 0.088, 
+   "neu": 0.784, 
+   "pos": 0.128, 
+   "compound": 0.9625
+  }
+ ], 
+ [
+  "c", 
+  "Force of habit, really.\n\n***New Hampshire*** has had very early primaries for a long time, because during spring primaries the roads would be so muddy that farmers couldn't make it into town to vote.  So New Hampshire decided to hold them before the spring thaw.  I forget when they started (I recall 1912 offhand) but I know there's a set of plaques in Concord that list the recent winners, starting with Estes Kefauver, a senator from Tennessee, in 1952.\n\nIn truth, though, the New Hampshire primary, and primaries in general, had limited impact before 1968.  I know Kennedy dueled Humphrey in a few primaries in 1960, but that was more to show strength than to win delegates.  Most delegates were assigned by party bosses, leading to nominations being decided in the proverbial smoke-filled rooms.  I believe Henry Cabot Lodge won the New Hampshire primary one year without even campaigning, while he was ambassador to Vietnam.\n\nThings started changing in 1968 when LBJ, the sitting president, barely beat anti-war candidate Eugene McCarthy in the New Hampshire primary.  McCarthy's surprising show of strength prompted Bobby Kennedy to join the race about a week later, and LBJ to drop out soon after.  After the 1968 Democratic National Convention was fraught with ugly conflict between party regulars and protesters, a commission headed by Senator George McGovern revised the nomination process to shift power away from party bosses and towards primary voters.\n\nSo it was not a coincidence that the 1972 nomination went to the candidate who best knew the new system, George McGovern.  Along with his campaign manager, Gary Hart (who would almost win the nomination himself twelve years later), McGovern found innovative ways of picking up delegates during the primaries.  One idea was to focus on the ***Iowa*** caucuses, which had been around before but never received any attention.  McGovern correctly realized that if he, as a lesser-known candidate, won the Iowa caucuses, he would receive more attention and hopefully a better share of the vote in later primaries.  The plan worked, and he won the nomination.  Iowa's status as a major step in the nomination process was confirmed four years later, when a governor of Georgia no one had heard of camped out in Iowa, won the caucuses, and became history's greatest monster,^1 Jimmy Carter.\n\nEver since, other states have tried getting in on some of that early-contest action.  Delaware made a strong push in 1996 I think, and Michigan and Florida both tried jumping the line in 2008, but DNC rules punish the delegations of states that go before Iowa or New Hampshire.  New Hampshire even has a state law that the primary has to go seven days before any other primary.  So although other states attempting to cut in front was a quadrennial tradition for decades, Iowa and New Hampshire have remained the first.\n\nSo the trick other states have ended up using is not competing with Iowa or New Hampshire, but coming up with a gimmick of their own.  I honestly don't recall when ***South Carolina*** started using the \"First in the South\" slogan, but I know it was the third contest in 2000, when George W. Bush and John McCain had quite the street fight in South Carolina when it looked like McCain might knock Bush out of the nomination.  (He didn't.)  South Carolina was a major factor in the 2004 Democratic contest as well, and its hold as First in the South seems to have solidified.  (It looks like the Nevada caucuses are solidifying up as \"First in the West\" as well.)\n\nI'm doing this all offhand, so if anyone wants any sources or thinks I may be off on any of the details, please let me know and I'll look into it.\n\n1.  It's a Simpsons joke!  I love Carter.", 
+  {
+   "neg": 0.044, 
+   "neu": 0.791, 
+   "pos": 0.165, 
+   "compound": 0.9984
+  }
+ ], 
+ [
+  "c", 
+  "&gt;  I think it\u2019s funny that the 80/20 rule works for wealth distribution\u2026 and natural phenomena\u2026 (Just read on Wikipedia). \n\nYeah ... zipf's law. And the small-world network people and the chaos people will tell you that 1/f distributions ('scale free') are a sign of self-organization. Order out of chaos. Which means *that* income distribution may well be a natural phenomena in a complex dynamic network system (the economy) as much as a stable ecosystem made of of populations of evolved creatures.\n\n&gt; On the topic of Wall street funding main street, in regards to hedge funds you won\u2019t believe. 100 plus million will be tied up in an investment for years\u2026. and how many people work in the back office? Usually 5-10. Maybe 20 if its billion plus firm \n\nWell, there are certainly outsized portfolios and returns per-person working at the fund. I agree with that. And the LPs are \"locked up\" for a while. I agree. The fund itself may move in and out of different positions more rapidly, though. Each \"hedge fund\" (which has over time become a fairly vague term) has a \"schtick\" or a \"trick\", an investment thesis, via which they generate their \"how we make our returns that beat the market\" story. Whatever. Do they help provide liquidity to the market at large? Maybe. I don't know. Does better market liquidity help main street? Maybe. I don't know. I can't argue for or against the modern form of hedge funds because I really don't know anything about them any more. They've changed too much since I did know something, and I haven't kept up. \n\nMy worry about main-street as intersects 'wall-street' is two-fold: Depository Financial Institutions (Consumer and merchant banks with checking and savings accounts) should not be able to use that DDA aggregate to collateralize market bets. Glass-stegal kind of got rid of that. Under Clinton (yes, with a Republican congress) we got rid of this for some reason. I don't know why we got rid of it, but it doesn't seem to have been positive. So, that's One. Number two is that when banks (these depository account asset banks) *should* be making their money doing \"loans\" to main-street. Yes, in current times they need to be careful (due-diligence). I get that. They aren't VC. But with essentially 0% interest rates, why would they lend *any* money. They essentially don't. Which is a problem for all of us ... because savings and loans is what they are supposed to do!\n\n&gt; It\u2019s true the rich may thrive on American wealth but let\u2019s not get too cozy about it. Our economic situation is not going to improve unless we do something about it.\n\nAgreed. So the question is to define the problem. What is one of the problems? Unemployment. Why? Labor not needed. Why? No (global) demand for American built products and services, at the price America can make/deliver them. Right? \n\nTell evil capitalists to hire more? To do what? There's no demand for American-built products. Why not? Expensive. Raise minimum wage? That makes it worse -- products more expensive. \"The rich should fix it\" -- well, they *do* fix their problem ... by exporting labor requirements to China and robots. Still leaves us with unemployment.\n\nSo, to solve unemployment, we need more demand for products/services. OK, --give-- everyone a job, those people will have demand? Well, sure -- they'll demand cheap products from China. American employer's will go bankrupt (no customers) and we are ... right back here.\n\nThen, what do we do about it? Well, let's break this down: why isn't America competitive with it's ability to build inexpensive consumer products? (Ignoring the fact that we are -- America is the largest manufacturing country in the world; we just don't need that many people to do it...)\n\nHint1: There is an answer to this core problem, if you break it down to its core elements.\n\nHint2: Having the government mandate prosperity has never in the history of the world ever worked.\n\nWe can chat about this later. I like talking to you! :-)\n\n", 
+  {
+   "neg": 0.076, 
+   "neu": 0.786, 
+   "pos": 0.138, 
+   "compound": 0.9913
+  }
+ ], 
+ [
+  "b", 
+  "Are you a Democrat or a Republican? ", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "b", 
+  "In general, regional actors will try to fill the power vacuum, or the country itself will expand its military to compensate.", 
+  {
+   "neg": 0.0, 
+   "neu": 0.897, 
+   "pos": 0.103, 
+   "compound": 0.3182
+  }
+ ], 
+ [
+  "a", 
+  "&gt;The candidates explained that we have to make sure weapons do not fall into the \"wrong hands\". This statement has absolutely zero meaning to me because just last week I watched a video of a rebel eating the heart of a dead man. Are those people really \"the right people\"? Of course there is no simple answer but in my opinion, I think that if peace is really the goal, sending weapons is wholly counterintuitive.\n\nHonestly, a lot of times politicians give easy, boring answers when they don't know what's going on.  Whether we should expect Senate candidates to have well-formed opinions on the Syrian civil war is another issue.", 
+  {
+   "neg": 0.17, 
+   "neu": 0.719, 
+   "pos": 0.111, 
+   "compound": -0.6652
+  }
+ ], 
+ [
+  "a", 
+  "&gt; avoid the more controversial aspects of Libertarianism such as relaxed regulations... \n\nWhy is \"relaxed regulations\" a controversial aspect?  The only way for such a loose phrase can be is basically begging the question - you assume that the current level of regulation is either ideal or actually too little and that all the current regulations are needed.  Neither are necessarily true.  For a long time I've said that Occupy and the Tea Party are not necessarily at odds - I could easily convince some of my Tea Party friends to support more social service nets if we were to go through government and cut out what it does poorly/isn't really needed.  [Here is the website](http://www.gpo.gov/fdsys/browse/collectionCfr.action?selectedYearFrom=2013&amp;go=Go) that lists the regulations, for 2013 (the last annual update).  Turn of the century the length was something around 130k+ pages.  So thinking that maybe there are a bunch of regulations that could be removed is somehow controversial?  Heck, if only 1% of those regulations were just redundant or had someone reporting to multiple authorities, that would be 1.3k of pages removed.\n\n&gt;...and isolationist foreign policy\n\nI think this is probably where you can get some traction, but at the same time the Democratic party and the far-left continually harm on our military spending.  Is it really that controversial then to reduce our involvement in the world?", 
+  {
+   "neg": 0.071, 
+   "neu": 0.819, 
+   "pos": 0.11, 
+   "compound": 0.7454
+  }
+ ], 
+ [
+  "b", 
+  "http://www.examiner.com/article/the-media-blames-bush-for-the-attacks-on-9-11-01", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "&gt; Now you are saying that it's ignorance, not greed\n\nIgnorance and greed go hand in hand most often.  You are greedy, wanting to take the risk because you see the payoff.  But many times you don't full understand the downside risk.  Ignorance and greed.\n\n&gt;What if my company offered you a go-cart that we assured you would make it and they were selling twenty a day, several of your friends purchased one, and we were a company that's been in business for fifty years, selling go-carts?\n\nBefore you put your butt in the seat and try to jump it, you actually model it out and see if it is possible.  You go and understand the risks before you put your life in the hands of a go-cart.  A mortgage, literally, means a \"death pledge\".\n\nDo you think it is reasonable for someone to trust everything they are told?", 
+  {
+   "neg": 0.1, 
+   "neu": 0.743, 
+   "pos": 0.157, 
+   "compound": 0.8643
+  }
+ ], 
+ [
+  "a", 
+  "Are you asking me to give you advice on a legal brief in a Federal Appellate Case which is legally sound enough for you to act upon?\n\nBecause even if I was comfortable giving such advice, which I'm not, it would violate several laws as I haven't passed the bar in the relevant jurisdictions, and what you are asking me for comes dangerously close to providing legal advice as an attorney.", 
+  {
+   "neg": 0.04, 
+   "neu": 0.792, 
+   "pos": 0.168, 
+   "compound": 0.7736
+  }
+ ], 
+ [
+  "b", 
+  "&gt; loophole that allows you bid on the project if you have 1 guy on staff that graduated from an apprenticeship program 25 years ago, and the rest of your crew is illegal Mexicans who dug tunnels into the US from Mexico until last year\n\nThat's one extreme.  The other extreme is a company consisting *entirely* of people who graduated an apprenticeship more than 5 years ago, and have been improving their craft on the job for the last 6 years?  They would be prohibited from this job, too.\n\n&gt; If union shops didn't hire and graduate apprenticeships in the last couple of years due to the economic downturn, then they can't meet section 320-5B requirements either, no? am i missing some key piece of information here?\n\nThe difference is that Union shops are significantly more likely to constantly have someone in training, etc, as Ben said.", 
+  {
+   "neg": 0.057, 
+   "neu": 0.924, 
+   "pos": 0.019, 
+   "compound": -0.6946
+  }
+ ], 
+ [
+  "b", 
+  "Most people don't work minimum wage jobs out of choice, they do it out of necessity. If someone is unemployed and has no money, they will take a minimum wage job because it is the best offer they can find, and it likely won't pay enough to fully satisfy their living needs. \n\nThere's actually an interesting phenomenon occurring in some countries in Europe such as Spain where people are voluntarily working jobs that haven't payed them in months because the possibility of eventually getting some money is a better alternative to unemployment. ([source](http://www.nytimes.com/2012/12/17/world/europe/in-spain-having-a-job-no-longer-guarantees-a-paycheck.html?pagewanted=all&amp;_r=0)) By your argument, even a job that pays nothing doesn't pay too little since it is performed voluntarily.", 
+  {
+   "neg": 0.062, 
+   "neu": 0.81, 
+   "pos": 0.128, 
+   "compound": 0.7955
+  }
+ ], 
+ [
+  "b", 
+  "http://beta.congress.gov/\n\nOr Proquest Congressional service, if you have access to it.", 
+  {
+   "neg": 0.0, 
+   "neu": 1.0, 
+   "pos": 0.0, 
+   "compound": 0.0
+  }
+ ], 
+ [
+  "a", 
+  "&gt;If you want the tax code simplified, you can just eliminiate loopholes until its easy peasy\n\nThe problem is that those \"loopholes\" *aren't*.  They are there for specific reasons - usually political payback, but often times graft.  And you'll never get those truly closed *because they are there for that reason*.  You're right though, you don't need to go to a sales tax, but we need to pass a flat tax tax with only personal exemptions (or even bracketed with only one personal exemption) and put a 2/3 vote requirement to adjust it beyond that.  The fact that I can charge $100 an hour (low end) to do someone's taxes because it is so impossible for them to do it accurately is a shame.", 
+  {
+   "neg": 0.073, 
+   "neu": 0.902, 
+   "pos": 0.025, 
+   "compound": -0.7911
+  }
+ ]
+]

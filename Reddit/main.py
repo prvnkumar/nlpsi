@@ -20,6 +20,7 @@ from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
 __author__ = 'Eva Sharma and Praveen Kumar'
 
 from lm import *
+from mrc import MRC
 
 #Directory Paths
 ROOT_DIR = (os.path.dirname(__file__)) # This is your Project Root
@@ -244,6 +245,7 @@ def findUsersWhoQuit(regularUsers):
     print len(activeUsers)
     regularUsers = quitters + activeUsers
 
+    #'''
     for user in regularUsers:
         responseSentiment[user] = []
         commentSentiment[user] = []
@@ -404,7 +406,50 @@ def findUsersWhoQuit(regularUsers):
     print "Q JS Divergence :\t" , numpy.average([jsdiv[user] for user in Q])
     print "A JS Divergence :\t" , numpy.average([jsdiv[user] for user in A])
 
+    #'''
 
+    print "Q mrc :"
+    
+    mrcvQ = [0 for i in range(14)]
+    cnt = 0
+    for user in quitters:
+        cnt += 1
+        v = mrcPrep(comTxtBeforeSOF[user])
+        for i in range(14):
+            mrcvQ[i] += v[i]
+    for i in range(14):
+        print mrcvQ[i] / float(cnt)
+
+    print "A mrc :"
+        
+    mrcvA = [0 for i in range(14)]
+    cnt = 0
+    for user in activeUsers:
+        cnt += 1
+        v = mrcPrep(comTxtBeforeSOF[user])
+        for i in range(14):
+            mrcvA[i] += v[i]
+    for i in range(14):
+        print mrcvA[i] / float(cnt)
+    
+def mrcPrep(comments):
+    global mrc
+    print '.',
+    sys.stdout.flush()
+    cnt = 0
+    val = [0 for i in range(14)]
+    
+    for comment in comments:
+        text = nltk.Text(word_punct_tokenizer.tokenize(comment.lower()))
+        for x in text:
+            cnt += 1
+            v = mrc.query(x)
+            for i in range(14):
+                val[i] += v[i]
+    if cnt > 0:
+        for i in range(14):
+            val[i] /= float(cnt)
+    return val
 
 def ugramModel(comments):
     global lang_model
@@ -439,6 +484,10 @@ def average(ll):
 
 
 if __name__ == "__main__":
+    global mrc
+    mrc = MRC()
+    mrc.init()
+    
     regularUsers = findAndStoreRegularUsers()
     print len(regularUsers)
     findUsersWhoQuit(regularUsers)

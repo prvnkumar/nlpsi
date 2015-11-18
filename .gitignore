@@ -1,3 +1,5 @@
 *.swp
 *~
 Reddit/ProcessedData/*
+Reddit/RawData/*
+Reddit/Tmp/*

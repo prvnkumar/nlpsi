@@ -47,7 +47,9 @@ class MRC():
         return self.data[word.lower()]
 
     def query(self, word):
-        return self.query_nlet(word), \
+        if word not in self.data:
+            return [0 for i in range(14)]
+        return [self.query_nlet(word), \
                self.query_nphon(word), \
                self.query_nsyl(word), \
                self.query_kffreq(word), \
@@ -60,7 +62,7 @@ class MRC():
                self.query_imag(word), \
                self.query_meanc(word), \
                self.query_meanp(word), \
-               self.query_aoa(word)
+               self.query_aoa(word)]
 
     def query_nlet(self, word):
         return int(self.data[word.lower()][0][0:2])
