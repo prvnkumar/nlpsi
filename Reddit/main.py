@@ -34,6 +34,8 @@ word_punct_tokenizer = WordPunctTokenizer()
 stop = stopwords.words('english')
 lang_model = None
 
+mem_buffer = {}
+
 ###
 ### Read/Load json
 ###
@@ -50,11 +52,27 @@ class ConcatJSONDecoder(json.JSONDecoder):
             end = _w(s, end).end()
             yield obj
 
+def bufferAdd(path, comment):
+    global mem_buffer
+    if path not in mem_buffer:
+        mem_buffer[path] = []
+    mem_buffer[path] += [comment]
+
+def bufferFlush():
+    global mem_buffer
+    for path in mem_buffer:
+        with open(path, 'a+') as outfile:
+            for comment in mem_buffer[path]:
+                json.dump(comment, outfile)
+                outfile.write("\n")
+    mem_buffer = {}
+
 def storeDataForUser(comment):
     """
     Store per user data in file
     """
     global lang_model
+    
     if comment.get("selftext") !=  None :
         commentText = comment["selftext"]
     elif comment.get("body") != None:
@@ -65,9 +83,7 @@ def storeDataForUser(comment):
     comment.pop('body', None)
     lang_model.update(commentText)
 
-    with open(os.path.join(PROC_DATA_PATH,str(comment["author"])), 'a+') as outfile:
-        json.dump(comment, outfile)
-        outfile.write("\n")
+    bufferAdd(os.path.join(PROC_DATA_PATH,str(comment["author"])), comment)
 
 def storeComment(regularUsers, comment):
     if len(comment['children']) > 0:
@@ -145,6 +161,7 @@ def findAndStoreRegularUsers():
                    cls=ConcatJSONDecoder)
             for comment in jsonList:
                 storeComment(regularUsers, comment)
+    bufferFlush()
     print "storing done"
     with open(REGUSERLIST, 'w') as f:
         f.write('\n'.join(regularUsers))
@@ -195,6 +212,13 @@ def getSentimentResponse(comment):
         sentimentPerComment.append(worker(response))
     return sentimentPerComment
 
+def lm_init():
+    global lang_model
+    if lang_model == None:
+        lang_model = LM()
+        if os.path.isfile(LM_PATH):
+            with open(LM_PATH, 'r') as f:
+                lang_model = pickle.load(f)
 
 def findUsersWhoQuit(regularUsers):
     """
@@ -361,7 +385,7 @@ def findUsersWhoQuit(regularUsers):
 
     comTxtBeforeSOFQ = [comTxtBeforeSOF[user][:minAvgNumCom] for user in quitters]
     comTxtBeforeSOFA = [comTxtBeforeSOF[user][:minAvgNumCom] for user in activeUsers]
-    pool = Pool()
+    pool = Pool(initializer = lm_init)
     ugramQ = pool.map(ugramModel, comTxtBeforeSOFQ)
     ugramA = pool.map(ugramModel, comTxtBeforeSOFA)
     for idx, user in enumerate(quitters):

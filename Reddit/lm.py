@@ -11,12 +11,12 @@ class LM:
     def __init__(self):
         self.num_grams = 0
         self.tf = dict()
-        self.n = 2
+        self.n = 1
         self.alpha = 1
 
     def update(self, text):
         tokens = [w for w in nltk.Text(tokenizer.tokenize(text.lower())) if w not in stop]
-        ngram_list = [tuple(tokens[i:i+self.n]) for i in xrange(len(tokens)-self.n)]
+        ngram_list = [tuple(tokens[i:i+self.n]) for i in xrange(len(tokens)-self.n+1)]
         self.num_grams += len(ngram_list)
         for gram in ngram_list:
             self.tf[gram] = self.tf.get(gram, 0) + 1
@@ -35,7 +35,7 @@ class LM:
         prob = dict()
         freq = dict()
         tokens = [w for w in nltk.Text(tokenizer.tokenize(text.lower())) if w not in stop]
-        ngram_list = [tuple(tokens[i:i+self.n]) for i in xrange(len(tokens)-self.n)]
+        ngram_list = [tuple(tokens[i:i+self.n]) for i in xrange(len(tokens)-self.n+1)]
         N = len(ngram_list)
         d = len(self.tf)
         for gram in ngram_list:
