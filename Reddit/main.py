@@ -291,7 +291,7 @@ class Model:
         if len(regularUsers) == 0:
             return None
 
-        #'''
+        #"""
         for user in regularUsers:
             responseSentiment[user] = []
             commentSentiment[user] = []
@@ -505,9 +505,10 @@ class Model:
         stats['A_KL_divergence_stddev'] = numpy.std([kldiv[user] for user in A])
         self.print_stats(stats)
         
-        '''
+        #"""
 
-        print "Q mrc :"
+        '''
+        #print "Q mrc :"
         
         mrcvQ = [0 for i in range(14)]
         cnt = 0
@@ -517,9 +518,10 @@ class Model:
             for i in range(14):
                 mrcvQ[i] += v[i]
         for i in range(14):
-            print mrcvQ[i] / float(cnt)
+            #print mrcvQ[i] / float(cnt)
+            stats['MRC_Q_'+str(i)] = mrcvQ[i] / float(cnt)
 
-        print "A mrc :"
+        #print "A mrc :"
             
         mrcvA = [0 for i in range(14)]
         cnt = 0
@@ -529,7 +531,9 @@ class Model:
             for i in range(14):
                 mrcvA[i] += v[i]
         for i in range(14):
-            print mrcvA[i] / float(cnt)
+            #print mrcvA[i] / float(cnt)
+            stats['MRC_A_'+str(i)] = mrcvA[i] / float(cnt)
+        
         '''
         
     def mrcPrep(self, comments):
