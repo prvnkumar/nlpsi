@@ -534,6 +534,7 @@ class Model:
             #print mrcvA[i] / float(cnt)
             stats['MRC_A_'+str(i)] = mrcvA[i] / float(cnt)
         
+        self.print_stats(stats)
         '''
         
     def mrcPrep(self, comments):
@@ -594,8 +595,11 @@ class Model:
         self.mrc.init()
         regularUsers = self.findAndStoreRegularUsers()
         print len(regularUsers)
+        if len(regularUsers) == 0:
+            return False
         self.findUsersWhoQuit(regularUsers)
         print '---- ' + self.subreddit
+        return True
 
     def print_stats(self, stats):
         l.acquire()
@@ -617,7 +621,8 @@ def process_subreddit(subreddit):
     l.release()
 
     model = Model(subreddit)
-    model.start()
+    if not model.start():
+        return
     l.acquire()
     global_data.total_running -= 1
     print 'Waiting for : ', global_data.total_running, '/', global_data.total_started
@@ -631,3 +636,11 @@ if __name__=="__main__":
             subreddits.append(fileName.split('.')[0])
     pool = mp.Pool()
     pool.map(process_subreddit, subreddits)
+    '''
+    ok = False
+    for subreddit in subreddits:
+        if subreddit == "AnnArbor":
+            ok = True
+        if ok:
+            process_subreddit(subreddit)
+    '''
