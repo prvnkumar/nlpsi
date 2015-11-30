@@ -59,7 +59,7 @@ class LM:
         for gram,_ in self.tf.iteritems():
             p = self.prob(gram)
             q = qprob[gram]
-            kldiv += -p * math.log(p/q, 2)
+            kldiv += p * math.log(p/q, 2)
         return kldiv
 
     def jsdivergence(self, text):
@@ -69,7 +69,7 @@ class LM:
             p = self.prob(gram)
             q = qprob[gram]
             m = (p+q)/2
-            jsdiv += (-p * math.log(p/m, 2)) + (-q * math.log(q/m, 2))
+	    jsdiv += ((p * math.log(p/m, 2)) + (q * math.log(q/m, 2)))/2 
         return jsdiv
 
 

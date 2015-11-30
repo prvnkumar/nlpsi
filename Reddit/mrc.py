@@ -1,7 +1,7 @@
 class MRC():
     def init(self):
         self.data = {}
-        f = open("MRC\\mrc2.dct", "r")
+        f = open("MRC/mrc2.dct", "r")
         line = f.readline()
         while line:
             word = line[51:].split('|')[0].lower()
