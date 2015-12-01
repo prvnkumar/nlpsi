@@ -638,9 +638,13 @@ if __name__=="__main__":
     #pool.map(process_subreddit, subreddits)
     #'''
     ok = False
+    cnt = 0
     for subreddit in subreddits:
-        if subreddit == "AskMarketing":
+        cnt += 1
+        print cnt, '/', len(subreddits)
+        if subreddit == "apple":
             ok = True
+            continue
         if ok:
             process_subreddit(subreddit)
     #'''
