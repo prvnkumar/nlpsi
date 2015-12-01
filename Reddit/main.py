@@ -291,7 +291,7 @@ class Model:
         if len(regularUsers) == 0:
             return None
 
-        #"""
+        """
         for user in regularUsers:
             responseSentiment[user] = []
             commentSentiment[user] = []
@@ -505,9 +505,9 @@ class Model:
         stats['A_KL_divergence_stddev'] = numpy.std([kldiv[user] for user in A])
         self.print_stats(stats)
         
-        #"""
+        """
 
-        '''
+        #'''
         #print "Q mrc :"
         
         mrcvQ = [0 for i in range(14)]
@@ -535,7 +535,7 @@ class Model:
             stats['MRC_A_'+str(i)] = mrcvA[i] / float(cnt)
         
         self.print_stats(stats)
-        '''
+        #'''
         
     def mrcPrep(self, comments):
         print '.',
@@ -634,13 +634,13 @@ if __name__=="__main__":
     for fileName in os.listdir(RAW_DATA_PATH):
         if fileName.endswith('jsonlist'):
             subreddits.append(fileName.split('.')[0])
-    pool = mp.Pool()
-    pool.map(process_subreddit, subreddits)
-    '''
+    #pool = mp.Pool()
+    #pool.map(process_subreddit, subreddits)
+    #'''
     ok = False
     for subreddit in subreddits:
-        if subreddit == "AnnArbor":
+        if subreddit == "AsianLadyboners":
             ok = True
         if ok:
             process_subreddit(subreddit)
-    '''
+    #'''
