@@ -639,7 +639,7 @@ if __name__=="__main__":
     #'''
     ok = False
     for subreddit in subreddits:
-        if subreddit == "AsianLadyboners":
+        if subreddit == "AskMarketing":
             ok = True
         if ok:
             process_subreddit(subreddit)
