@@ -642,7 +642,7 @@ if __name__=="__main__":
     for subreddit in subreddits:
         cnt += 1
         print cnt, '/', len(subreddits)
-        if subreddit == "apple":
+        if subreddit == "airsoft": #"apple":
             ok = True
             continue
         if ok:
