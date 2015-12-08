@@ -1,4 +1,19 @@
+import math
+#import numpy as np
+import matplotlib.pyplot as plt
+
 def main():
+    fsize = {}
+    f = open("fsize.txt", "r")
+    x = f.readline()
+    while x:
+        x = x.split()
+        x[1] = x[1].split('.')
+        if x[1][1] == "jsonlist":
+            fsize[x[1][0].lower()] = int(x[0])
+        x = f.readline()
+    f.close()
+    
     f = open("stats_mrc.txt", "r")
     h = f.readline()
     h = h.split()[1:]
@@ -7,10 +22,12 @@ def main():
     while x:
         x = x.split()
         t = x[0]
-        r[t] = {}
-        x = x[1:]
-        for i in xrange(len(h)):
-            r[t][h[i]] = float(x[i])
+        if t.lower() not in fsize or fsize[t.lower()] > 30000000:
+        #if True:
+            r[t] = {}
+            x = x[1:]
+            for i in xrange(len(h)):
+                r[t][h[i]] = float(x[i])
         x = f.readline()
     f.close()
     
@@ -55,8 +72,33 @@ def main():
         for j in xrange(len(delta[i])):
             f.write(str(delta[i][j]) + ', ')
         f.write("\n")
-        
+
+    '''
+    for i in xrange(14):
+        for j in xrange(len(delta[i])):
+            delta[i][j] /= max(abs(delta[i][0]), abs(delta[i][-1]))
+        his = {}
+        for j in xrange(len(delta[i])):
+            k = math.floor(delta[i][j] * 40)
+            if k not in his:
+                his[k] = 0
+            his[k] += 1
+        for k in range(-20, 21):
+            if k not in his: his[k] = 0
+            f.write(str(his[k]) + ', ')
+        f.write("\n")
+    '''
+    
     f.close()
+
+    #plt.hist(delta[0], bins=45)
+    #plt.hist(delta[1], bins=45)
+    #plt.hist(delta[2], bins=45)
+    #plt.hist(delta[3], bins=45)
+    #plt.hist(delta[6], bins=45)
+    plt.hist(delta[13], bins=45)
+    plt.grid(True)
+    plt.show()
 
 if __name__ == '__main__':
     main()
